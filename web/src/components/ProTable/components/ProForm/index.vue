@@ -1,11 +1,3 @@
-<!--
- * @Author: saberc8
- * @Date: 2022-12-02 16:41:30
- * @LastEditTime: 2022-12-09 16:15:10
- * @LastEditors: yusenlin
- * @Description: ProTable 的筛选部分
- * @FilePath: \vben-thin-next-1122\src\components\ProTable\components\ProForm\index.vue
--->
 <template>
   <a-form
     ref="proFromRef"

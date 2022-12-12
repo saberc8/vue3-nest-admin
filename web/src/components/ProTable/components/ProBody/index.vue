@@ -1,12 +1,3 @@
-<!--
- * @Author: yusenlin
- * @Date: 2022-12-02 16:41:23
- * @LastEditTime: 2022-12-10 12:06:32
- * @LastEditors: yusenlin
- * @Description: proTable的table渲染组件
- * @FilePath: \vben-thin-next-1122\src\components\ProTable\components\ProBody\index.vue
- * 可以输入预定的版权声明、个性签名、空行等
--->
 <template>
   <div>
     <vxe-grid v-bind="gridOptions">

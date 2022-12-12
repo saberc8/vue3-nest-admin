@@ -19,8 +19,8 @@
 </template>
 <script lang="ts" setup>
   import LoginForm from './LoginForm.vue'
-  const title = 'Vben Admin'
-  const description = 'Vben Admin 是一个基于 Vue3 和 TypeScript 的后台管理系统解决方案'
+  const title = 'Vue Nestjs Admin'
+  const description = 'Vue Nestjs Admin 是一个基于 Vue3 和 Nestjs 的rbac后台管理系统解决方案'
   const activeKey = ref('1')
 </script>
 <style lang="less">
