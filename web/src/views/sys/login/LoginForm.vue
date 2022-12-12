@@ -45,7 +45,7 @@
   import { useUserStore } from '@/store/modules/user'
   import { LoginStateEnum, useLoginState, useFormRules, useFormValid } from './useLogin'
 
-  const { notification, createErrorModal } = useMessage()
+  const { notification } = useMessage()
   const userStore = useUserStore()
 
   const { getLoginState } = useLoginState()
