@@ -1,0 +1,17 @@
+
+*.sh
+node_modules
+*.md
+*.woff
+*.ttf
+.vscode
+.idea
+dist
+/public
+/docs
+.local
+/bin
+Dockerfile
+components.d.ts
+/src/auto-imports.d.ts
+/src/components/ProTable
