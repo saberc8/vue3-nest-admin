@@ -84,11 +84,7 @@
         })
       }
     } catch (error) {
-      createErrorModal({
-        title: '错误提示',
-        content: (error as unknown as Error).message || '登录失败',
-        getContainer: () => document.body,
-      })
+      console.log(error)
     } finally {
       loading.value = false
     }

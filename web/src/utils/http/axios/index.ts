@@ -30,6 +30,7 @@ const transform: AxiosTransform = {
    * @description: 处理响应数据。如果数据不是预期格式，可直接抛出错误
    */
   transformResponseHook: (res: AxiosResponse<Result>, options: RequestOptions) => {
+    console.log(res, '00000res');
     const { isTransformResponse, isReturnNativeResponse } = options
     // 是否返回原生响应头 比如：需要获取响应头时使用该属性
     if (isReturnNativeResponse) {
@@ -43,6 +44,7 @@ const transform: AxiosTransform = {
     // 错误的时候返回
 
     const { data } = res
+    console.log(res, 'axios-res')
     if (!data) {
       // return '[HTTP] Request has no return value';
       throw new Error('请求异常，请重试')
@@ -162,12 +164,12 @@ const transform: AxiosTransform = {
    * @description: 响应错误处理
    */
   responseInterceptorsCatch: (axiosInstance: AxiosResponse, error: any) => {
-    const { response, code, message, config } = error || {}
+    console.log(error, 'responseInterceptorsCatch');
+    const { response, code, message, config, request } = error || {}
     const errorMessageMode = config?.requestOptions?.errorMessageMode || 'none'
-    const msg: string = response?.data?.error?.message ?? ''
+    const errMessage: string = request.responseText ?? ''
     const err: string = error?.toString?.() ?? ''
-    let errMessage = ''
-
+    console.log(errMessage);
     try {
       if (code === 'ECONNABORTED' && message.indexOf('timeout') !== -1) {
         errMessage = '接口请求超时，请刷新重试'
@@ -177,18 +179,22 @@ const transform: AxiosTransform = {
       }
 
       if (errMessage) {
+        console.log(1);
         if (errorMessageMode === 'modal') {
+          console.log(2);
           createErrorModal({ title: '错误提示', content: errMessage })
         } else if (errorMessageMode === 'message') {
+          console.log(3);
           createMessage.error(errMessage)
+        } else {
+          return Promise.reject(error)
         }
-        return Promise.reject(error)
       }
     } catch (error) {
       throw new Error(error as unknown as string)
     }
 
-    checkStatus(error?.response?.status, msg, errorMessageMode)
+    // checkStatus(error?.response?.status, errMessage, errorMessageMode)
 
     // 添加自动重试机制 保险起见 只针对GET请求
     const retryRequest = new AxiosRetry()
@@ -254,12 +260,5 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
     ),
   )
 }
-export const defHttp = createAxios()
 
-// other api url
-// export const otherHttp = createAxios({
-//   requestOptions: {
-//     apiUrl: 'xxx',
-//     urlPrefix: 'xxx',
-//   },
-// });
+export const defHttp = createAxios()
