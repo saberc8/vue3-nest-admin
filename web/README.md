@@ -13,7 +13,6 @@
 
 - **最新技术栈**：使用 Vue3/vite2 等前端前沿技术开发
 - **TypeScript**: 应用程序级 JavaScript 的语言
-- **Mock 数据** 内置 Mock 数据方案
 - **权限** 内置完善的动态路由权限生成方案
 
 ## 预览
@@ -29,7 +28,6 @@
 - [Es6+](http://es6.ruanyifeng.com/) - 熟悉 es6 基本语法
 - [Vue-Router-Next](https://next.router.vuejs.org/) - 熟悉 vue-router 基本使用
 - [Ant-Design-Vue](https://2x.antdv.com/docs/vue/introduce-cn/) - ui 基本使用
-- [Mock.js](https://github.com/nuysoft/Mock) - mockjs 基本语法
 
 ## 安装使用
 
@@ -82,7 +80,6 @@ pnpm build
 
 如果这些插件对你有帮助，可以给一个 star 支持下
 
-- [vite-plugin-mock](https://github.com/anncwb/vite-plugin-mock) - 用于本地及开发环境数据 mock
 - [vite-plugin-html](https://github.com/anncwb/vite-plugin-html) - 用于 html 模版转换及压缩
 - [vite-plugin-imagemin](https://github.com/anncwb/vite-plugin-imagemin) - 用于打包压缩图片资源
 - [vite-plugin-compression](https://github.com/anncwb/vite-plugin-compression) - 用于打包输出.gz|.brotil 文件

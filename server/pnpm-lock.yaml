@@ -745,18 +745,6 @@ packages:
       - ts-node
     dev: true
 
-  registry.npmmirror.com/@jest/environment/28.1.3:
-    resolution: {integrity: sha512-1bf40cMFTEkKyEf585R9Iz1WayDjHoHqvts0XFYEqyKM3cFWDpeMoqKKTAF9LSYQModPUlh8FKptoM2YcMWAXA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@jest/environment/-/environment-28.1.3.tgz}
-    name: '@jest/environment'
-    version: 28.1.3
-    engines: {node: ^12.13.0 || ^14.15.0 || ^16.10.0 || >=17.0.0}
-    dependencies:
-      '@jest/fake-timers': registry.npmmirror.com/@jest/fake-timers/28.1.3
-      '@jest/types': registry.npmmirror.com/@jest/types/28.1.3
-      '@types/node': registry.npmmirror.com/@types/node/16.18.8
-      jest-mock: registry.npmmirror.com/jest-mock/28.1.3
-    dev: true
-
   registry.npmmirror.com/@jest/expect-utils/28.1.3:
     resolution: {integrity: sha512-wvbi9LUrHJLn3NlDW6wF2hvIMtd4JUl2QNVrjq+IBSHirgfrR3o9RnVtxzdEGO2n9JyIWwHnLfby5KzqBGg2YA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@jest/expect-utils/-/expect-utils-28.1.3.tgz}
     name: '@jest/expect-utils'

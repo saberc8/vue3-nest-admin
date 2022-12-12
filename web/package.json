@@ -1,10 +1,10 @@
 {
-  "name": "vben-admin",
-  "version": "2.9.0",
+  "name": "vue-nest-admin",
+  "version": "1.0.0",
   "author": {
-    "name": "vben",
-    "email": "anncwb@126.com",
-    "url": "https://github.com/anncwb"
+    "name": "saberc8",
+    "email": "yusenlin1122@qq.com",
+    "url": "https://github.com/saberc8/vue3-nest-admin"
   },
   "scripts": {
     "commit": "czg",
@@ -21,7 +21,7 @@
     "log": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "clean:cache": "rimraf node_modules/.cache/ && rimraf node_modules/.vite",
     "clean:lib": "rimraf node_modules",
-    "lint:eslint": "eslint --cache --max-warnings 0  \"{src,mock}/**/*.{vue,ts,tsx}\" --fix",
+    "lint:eslint": "eslint --cache --max-warnings 0  \"{src}/**/*.{vue,ts,tsx}\" --fix",
     "lint:prettier": "prettier --write  \"src/**/*.{js,json,tsx,css,less,scss,vue,html,md}\"",
     "lint:stylelint": "stylelint --cache --fix \"**/*.{vue,less,postcss,css,scss}\" --cache --cache-location node_modules/.cache/stylelint/",
     "lint:lint-staged": "lint-staged",
@@ -45,7 +45,6 @@
     "crypto-js": "^4.1.1",
     "dayjs": "^1.11.6",
     "lodash-es": "^4.17.21",
-    "mockjs": "^1.1.0",
     "nprogress": "^0.2.0",
     "pinia": "2.0.27",
     "qs": "^6.11.0",
@@ -71,7 +70,6 @@
     "@types/inquirer": "^9.0.3",
     "@types/intro.js": "^5.1.0",
     "@types/lodash-es": "^4.17.6",
-    "@types/mockjs": "^1.0.7",
     "@types/node": "^18.11.10",
     "@types/nprogress": "^0.2.0",
     "@types/qs": "^6.9.7",
@@ -123,7 +121,6 @@
     "vite-plugin-html": "^3.2.0",
     "vite-plugin-imagemin": "^0.6.1",
     "vite-plugin-mkcert": "^1.10.1",
-    "vite-plugin-mock": "^2.9.6",
     "vite-plugin-purge-icons": "^0.9.1",
     "vite-plugin-pwa": "^0.13.3",
     "vite-plugin-style-import": "^2.0.0",
@@ -139,13 +136,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/anncwb/vue-vben-admin.git"
+    "url": "git+https://github.com/saberc8/vue3-nest-admin.git"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/anncwb/vue-vben-admin/issues"
+    "url": "https://github.com/saberc8/vue3-nest-admin/issues"
   },
-  "homepage": "https://github.com/anncwb/vue-vben-admin",
+  "homepage": "https://github.com/saberc8/vue3-nest-admin.git",
   "engines": {
     "node": "^12 || >=14"
   },
