@@ -6,6 +6,7 @@ import { getConfig, IS_DEV } from './utils'
 export const config = getConfig()
 const PORT = config.PORT || 4000
 const PREFIX = config.PREFIX || '/'
+
 async function bootstrap() {
   const logger: Logger = new Logger('main.ts')
   const app = await NestFactory.create(AppModule, {
@@ -20,4 +21,5 @@ async function bootstrap() {
     logger.log(`Server running on http://localhost:${PORT}/${PREFIX}`)
   })
 }
+
 bootstrap()
