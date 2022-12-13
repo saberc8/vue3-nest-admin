@@ -25,7 +25,6 @@ async function bootstrap() {
 
   // 设置请求前缀
   app.setGlobalPrefix(PREFIX)
-  console.log(`http://localhost:${PORT}/${PREFIX}`)
   await app.listen(PORT, () => {
     logger.log(`Server running on http://localhost:${PORT}/${PREFIX}`)
   })
