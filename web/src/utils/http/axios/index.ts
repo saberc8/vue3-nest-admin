@@ -167,7 +167,7 @@ const transform: AxiosTransform = {
     console.log(error, 'responseInterceptorsCatch');
     const { response, code, message, config, request } = error || {}
     const errorMessageMode = config?.requestOptions?.errorMessageMode || 'none'
-    const errMessage: string = request.responseText ?? ''
+    let errMessage: string = request.responseText ?? ''
     const err: string = error?.toString?.() ?? ''
     console.log(errMessage);
     try {
