@@ -14,6 +14,10 @@ async function bootstrap() {
     // 开启日志级别打印
     logger: IS_DEV ? ['log', 'debug', 'error', 'warn'] : ['error', 'warn'],
   })
+  //允许跨域请求
+  app.enableCors()
+  // 设置请求前缀
+  app.setGlobalPrefix(PREFIX)
   // swagger
   const config = new DocumentBuilder()
     .setTitle('rbac api')
@@ -23,10 +27,7 @@ async function bootstrap() {
     .build()
   const document = SwaggerModule.createDocument(app, config)
   SwaggerModule.setup('docs', app, document)
-  //允许跨域请求
-  app.enableCors()
-  // 设置请求前缀
-  app.setGlobalPrefix(PREFIX)
+  logger.log(`Document running on http://localhost:${PORT}/docs`)
   await app.listen(PORT, () => {
     logger.log(`Server running on http://localhost:${PORT}/${PREFIX}`)
   })
