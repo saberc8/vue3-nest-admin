@@ -27,10 +27,13 @@
     "@nestjs/core": "^9.2.1",
     "@nestjs/mapped-types": "*",
     "@nestjs/platform-express": "^9.2.1",
+    "@nestjs/swagger": "^6.1.4",
     "cross-env": "^7.0.3",
+    "express": "^4.18.2",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.6.0",
+    "swagger-ui-express": "^4.6.0",
     "webpack": "^5.75.0",
     "yaml": "^2.1.3"
   },
