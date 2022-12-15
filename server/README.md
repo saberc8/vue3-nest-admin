@@ -15,3 +15,5 @@ tree命令的部分用法
 角色管理
 菜单管理
 api管理
+
+[DTO entity](https://zhuanlan.zhihu.com/p/296492029)
