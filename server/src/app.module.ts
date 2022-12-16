@@ -4,9 +4,10 @@ import { AppService } from './app.service'
 import { ApiModule } from './api/api.module'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { ConfigModule, ConfigService } from '@nestjs/config'
-
+import { ValidationPipe } from './pipe/validation.pipe'
 import { getConfig } from './utils'
 import { SharedModule } from './shared/shared.module'
+import { APP_FILTER, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core'
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -33,6 +34,13 @@ import { SharedModule } from './shared/shared.module'
     SharedModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    // 全局使用管道(数据校验)
+    {
+      provide: APP_PIPE,
+      useClass: ValidationPipe,
+    },
+  ],
 })
 export class AppModule {}

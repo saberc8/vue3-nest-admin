@@ -25,4 +25,34 @@ export class UserEntity extends SharedEntity {
     comment: '密码',
   })
   password!: string
+
+  @Column({
+    type: 'varchar',
+    length: 50,
+    name: 'nickname',
+    comment: '用户昵称',
+  })
+  nickname!: string
+
+  @Column({
+    type: 'varchar',
+    length: 50,
+    name: 'avatar',
+    comment: '用户头像',
+  })
+  avatar!: string
+
+  @Column({
+    type: 'tinyint',
+    name: 'is_super',
+    default: '0',
+    comment: '是否为超级管理员1表示是,0表示不是',
+  })
+  isSuper!: number;
+
+  @Expose()
+  isSuperStr(): string {
+    return this.isSuper === 1 ? '超级管理员' : '普通用户';
+  }
+
 }
