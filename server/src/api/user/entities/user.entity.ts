@@ -38,6 +38,7 @@ export class UserEntity extends SharedEntity {
     type: 'varchar',
     length: 50,
     name: 'avatar',
+    default: '',
     comment: '用户头像',
   })
   avatar!: string

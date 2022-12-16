@@ -12,7 +12,7 @@ export class UserService {
   ) {}
   async create(createUserDto: CreateUserDto): Promise<any> {
     console.log(createUserDto);
-    return `This action returns add user`
+    return await this.userEntity.save(createUserDto)
   }
 
   findAll() {
