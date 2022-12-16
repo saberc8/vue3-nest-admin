@@ -1,20 +1,5 @@
 import { IsEqual } from '@src/validators'
-import { Type } from 'class-transformer'
-import {
-  IsString,
-  IsNotEmpty,
-  MinLength,
-  IsMobilePhone,
-  IsOptional,
-  IsEmail,
-  IsArray,
-  ArrayMinSize,
-  ArrayUnique,
-  IsNumber,
-  IsInt,
-  Max,
-  Min,
-} from 'class-validator'
+import { IsString, IsNotEmpty } from 'class-validator'
 export class CreateUserDto {
   @IsString({ message: '用户名必须是字符类型' })
   @IsNotEmpty({ message: '用户名不能为空' })

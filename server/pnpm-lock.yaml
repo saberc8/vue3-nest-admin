@@ -20,12 +20,12 @@ specifiers:
   class-transformer: ^0.5.1
   class-validator: ^0.13.0
   cross-env: ^7.0.3
+  dayjs: ^1.11.7
   eslint: ^8.29.0
   eslint-config-prettier: ^8.5.0
   eslint-plugin-prettier: ^4.2.1
   express: ^4.18.2
   jest: 29.3.1
-  lodash: ^4.17.21
   mysql2: ^2.3.3
   prettier: ^2.8.1
   reflect-metadata: ^0.1.13
@@ -54,8 +54,8 @@ dependencies:
   class-transformer: registry.npmmirror.com/class-transformer/0.5.1
   class-validator: registry.npmmirror.com/class-validator/0.13.2
   cross-env: registry.npmmirror.com/cross-env/7.0.3
+  dayjs: registry.npmmirror.com/dayjs/1.11.7
   express: registry.npmmirror.com/express/4.18.2
-  lodash: registry.npmmirror.com/lodash/4.17.21
   mysql2: registry.npmmirror.com/mysql2/2.3.3
   reflect-metadata: registry.npmmirror.com/reflect-metadata/0.1.13
   rimraf: registry.npmmirror.com/rimraf/3.0.2
@@ -2706,6 +2706,12 @@ packages:
     name: date-fns
     version: 2.29.3
     engines: {node: '>=0.11'}
+    dev: false
+
+  registry.npmmirror.com/dayjs/1.11.7:
+    resolution: {integrity: sha512-+Yw9U6YO5TQohxLcIkrXBeY73WP3ejHWVvx8XCk3gxvQDCTEmS48ZrSZCKciI7Bhl/uCMyxYtE9UqRILmFphkQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/dayjs/-/dayjs-1.11.7.tgz}
+    name: dayjs
+    version: 1.11.7
     dev: false
 
   registry.npmmirror.com/debug/2.6.9:

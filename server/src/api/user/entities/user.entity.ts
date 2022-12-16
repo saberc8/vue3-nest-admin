@@ -49,11 +49,10 @@ export class UserEntity extends SharedEntity {
     default: '0',
     comment: '是否为超级管理员1表示是,0表示不是',
   })
-  isSuper!: number;
+  isSuper!: number
 
   @Expose()
   isSuperStr(): string {
-    return this.isSuper === 1 ? '超级管理员' : '普通用户';
+    return this.isSuper === 1 ? '超级管理员' : '普通用户'
   }
-
 }

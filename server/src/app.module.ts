@@ -6,6 +6,8 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { ValidationPipe } from './pipe/validation.pipe'
 import { AuthGuard } from './guard/auth.guard'
+import { HttpExceptionFilter } from './filters/http-exception.filter'
+import { TransformInterceptor } from './interceptors/transform.interceptor'
 import { getConfig } from './utils'
 import { SharedModule } from './shared/shared.module'
 import { APP_FILTER, APP_INTERCEPTOR, APP_PIPE, APP_GUARD } from '@nestjs/core'
@@ -45,6 +47,16 @@ import { APP_FILTER, APP_INTERCEPTOR, APP_PIPE, APP_GUARD } from '@nestjs/core'
     {
       provide: APP_GUARD,
       useClass: AuthGuard, //就是这个权限的守卫 写在提供者里面
+    },
+    // 全局使用过滤器
+    {
+      provide: APP_FILTER,
+      useClass: HttpExceptionFilter,
+    },
+    // 全局使用拦截器
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: TransformInterceptor,
     },
   ],
 })

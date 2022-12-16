@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable, HttpException } from '@nestjs/common'
 import { CreateUserDto } from './dto/create-user.dto'
 import { UpdateUserDto } from './dto/update-user.dto'
 import { InjectRepository } from '@nestjs/typeorm'
@@ -17,14 +17,19 @@ export class UserService {
    * @return {*}
    */
   async create(createUserDto: CreateUserDto): Promise<any> {
-    console.log(createUserDto);
-    const { username, password } = createUserDto
-    const isUsername = await this.userEntity.findOne({where: {username}})
-    console.log(isUsername);
-    if(isUsername) {
-      return '用户名已存在'
+    console.log(createUserDto)
+    const { username } = createUserDto
+    const isUsername = await this.userEntity.findOne({ where: { username } })
+    console.log(isUsername)
+    if (isUsername) {
+      throw new HttpException('用户名已存在', 201)
     }
-    return await this.userEntity.save(createUserDto)
+    try {
+      const result = await this.userEntity.save(createUserDto)
+      return result
+    } catch (error) {
+      throw new HttpException(error, 400)
+    }
   }
 
   findAll() {
@@ -39,7 +44,7 @@ export class UserService {
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`
+    return `This action updates a ${id} #${updateUserDto} user`
   }
 
   remove(id: number) {

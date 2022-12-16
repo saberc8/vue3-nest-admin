@@ -9,7 +9,7 @@ import { UserEntity } from './entities/user.entity'
   imports: [
     RouterModule.register([
       {
-        path: '',// 这里 如果不写path，那么就是默认的根路径
+        path: '', // 这里 如果不写path，那么就是默认的根路径
         module: UserModule,
       },
     ]),

@@ -12,6 +12,7 @@ export class AuthGuard implements CanActivate {
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest()
     const url = request.url.split('?')[0]
+    // 白名单判断
     if (apiWriteList.includes(url)) {
       return true
     }
@@ -21,6 +22,7 @@ export class AuthGuard implements CanActivate {
     console.log(token, '当前token----')
     if (token) {
       // 如果传递了token的话就要从redis中查询是否有该token
+      // -----redis拿token
       return true
     } else {
       throw new HttpException('请传递token', HttpStatus.FORBIDDEN)
