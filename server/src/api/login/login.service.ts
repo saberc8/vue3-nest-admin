@@ -5,7 +5,7 @@ import { UpdateLoginDto } from './dto/update-login.dto'
 @Injectable()
 export class LoginService {
   create(createLoginDto: CreateLoginDto) {
-    return 'This action adds a new login'
+    return `This action adds a new login${createLoginDto}`
   }
 
   findAll() {
@@ -17,7 +17,7 @@ export class LoginService {
   }
 
   update(id: number, updateLoginDto: UpdateLoginDto) {
-    return `This action updates a #${id} login`
+    return `This action updates a #${id}${updateLoginDto} login`
   }
 
   remove(id: number) {

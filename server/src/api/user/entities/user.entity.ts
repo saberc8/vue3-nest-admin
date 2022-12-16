@@ -1,6 +1,6 @@
 import { SharedEntity } from '@src/shared/entities/base.entity'
-import { Entity, Column, Index, BeforeInsert, BeforeUpdate, AfterLoad } from 'typeorm'
-import { Exclude, Expose } from 'class-transformer'
+import { Entity, Column, Index } from 'typeorm'
+import { Expose } from 'class-transformer'
 
 @Entity('user')
 export class UserEntity extends SharedEntity {

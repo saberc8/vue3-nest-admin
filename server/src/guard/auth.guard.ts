@@ -8,7 +8,6 @@ import {
 import apiWriteList from './apiWriteList'
 @Injectable()
 export class AuthGuard implements CanActivate {
-  constructor() {}
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest()
     const url = request.url.split('?')[0]
