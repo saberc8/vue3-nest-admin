@@ -51,7 +51,20 @@ export class UserEntity extends SharedEntity {
   })
   isSuper!: number
 
-  @Expose()
+  @Column({
+    type: 'tinyint',
+    name: 'status',
+    default: '1',
+    comment: '用户状态1表示正常,0表示禁止',
+  })
+  status!: number
+
+  @Expose({ name: 'statusText' }) // @Expose方法 get的时候 会显示这个字段
+  statusStr(): string {
+    return this.status === 0 ? '禁止' : '正常'
+  }
+
+  @Expose({ name: 'isSuperText' })
   isSuperStr(): string {
     return this.isSuper === 1 ? '超级管理员' : '普通用户'
   }
