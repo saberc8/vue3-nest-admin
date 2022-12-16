@@ -5,9 +5,10 @@ import { ApiModule } from './api/api.module'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { ValidationPipe } from './pipe/validation.pipe'
+import { AuthGuard } from './guard/auth.guard'
 import { getConfig } from './utils'
 import { SharedModule } from './shared/shared.module'
-import { APP_FILTER, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core'
+import { APP_FILTER, APP_INTERCEPTOR, APP_PIPE, APP_GUARD } from '@nestjs/core'
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -40,6 +41,10 @@ import { APP_FILTER, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core'
     {
       provide: APP_PIPE,
       useClass: ValidationPipe,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard, //就是这个权限的守卫 写在提供者里面
     },
   ],
 })

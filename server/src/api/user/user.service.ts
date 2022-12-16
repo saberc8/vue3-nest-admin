@@ -10,8 +10,20 @@ export class UserService {
     @InjectRepository(UserEntity)
     private readonly userEntity: Repository<UserEntity>,
   ) {}
+
+  /**
+   * @description: 创建用户接口
+   * @param {CreateUserDto} createUserDto
+   * @return {*}
+   */
   async create(createUserDto: CreateUserDto): Promise<any> {
     console.log(createUserDto);
+    const { username, password } = createUserDto
+    const isUsername = await this.userEntity.findOne({where: {username}})
+    console.log(isUsername);
+    if(isUsername) {
+      return '用户名已存在'
+    }
     return await this.userEntity.save(createUserDto)
   }
 
