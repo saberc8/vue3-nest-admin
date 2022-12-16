@@ -7,10 +7,10 @@
 
 ### 项目运行
 
-cd server
-pnpm i
-pnpm run start:dev
+cd server  
+pnpm i  
+pnpm run start:dev  
 
-cd web
-pnpm i
-pnpm run dev
+cd web  
+pnpm i  
+pnpm run dev  
