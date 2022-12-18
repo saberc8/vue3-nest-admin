@@ -1,5 +1,6 @@
 import { NestFactory } from '@nestjs/core'
-import { Logger, VersioningType } from '@nestjs/common'
+import { Logger } from '@nestjs/common'
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'
 
 import { AppModule } from './app.module'
 import { getConfig, IS_DEV } from './utils'
@@ -17,6 +18,16 @@ async function bootstrap() {
   app.enableCors()
   // 设置请求前缀
   app.setGlobalPrefix(PREFIX)
+  // swagger
+  const config = new DocumentBuilder()
+    .setTitle('rbac api')
+    .setDescription('The rbac API description')
+    .setVersion('1.0')
+    .addTag('rbac')
+    .build()
+  const document = SwaggerModule.createDocument(app, config)
+  SwaggerModule.setup('docs', app, document)
+  logger.log(`Document running on http://localhost:${PORT}/docs`)
   await app.listen(PORT, () => {
     logger.log(`Server running on http://localhost:${PORT}/${PREFIX}`)
   })
