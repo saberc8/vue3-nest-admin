@@ -29,7 +29,7 @@ import { APP_FILTER, APP_INTERCEPTOR, APP_PIPE, APP_GUARD } from '@nestjs/core'
         username: String(configService.get('datasource.username')),
         password: String(configService.get('datasource.password')),
         database: String(configService.get('datasource.database')),
-        entities: [__dirname + '/**/*.entity{.ts,.js}'],
+        entities: [`${__dirname}/**/*.entity{.ts,.js}`],
         synchronize: true,
       }),
     }),

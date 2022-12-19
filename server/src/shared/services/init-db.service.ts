@@ -3,12 +3,14 @@ import { ConfigService } from '@nestjs/config'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 import { UserEntity } from '@src/api/user/entities/user.entity'
+import { UserService } from '@src/api/user/user.service'
 @Injectable()
 export class InitDbService {
   constructor(
     @InjectRepository(UserEntity)
     private readonly userEntity: Repository<UserEntity>,
     private readonly configService: ConfigService,
+    private readonly userService: UserService
   ) {}
 
   onModuleInit() {
@@ -30,6 +32,12 @@ export class InitDbService {
         password,
         nickname,
         isSuper: 1,
+      })
+      await this.userService.create({
+        username,
+        password,
+        nickname,
+        confirmPassword: password,
       })
       console.log('初始化用户成功')
     } else {

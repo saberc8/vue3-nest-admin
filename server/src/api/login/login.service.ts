@@ -1,11 +1,19 @@
 import { Injectable } from '@nestjs/common'
 import { CreateLoginDto } from './dto/create-login.dto'
 import { UpdateLoginDto } from './dto/update-login.dto'
-
+import { InjectRepository } from '@nestjs/typeorm'
+import { Repository } from 'typeorm'
+import { UserEntity } from '@src/api/user/entities/user.entity'
 @Injectable()
 export class LoginService {
-  create(createLoginDto: CreateLoginDto) {
-    return `This action adds a new login${createLoginDto}`
+  constructor(
+    @InjectRepository(UserEntity)
+    public readonly userEntity: Repository<UserEntity>,
+  ){}
+  async login(createLoginDto: CreateLoginDto): Promise<Object> {
+    const { username, password } = createLoginDto
+    const user = this.userEntity.findOne({where: {username}})
+    return user
   }
 
   findAll() {

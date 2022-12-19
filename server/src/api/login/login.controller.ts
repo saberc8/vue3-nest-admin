@@ -8,8 +8,9 @@ export class LoginController {
   constructor(private readonly loginService: LoginService) {}
 
   @Post()
-  create(@Body() createLoginDto: CreateLoginDto) {
-    return this.loginService.create(createLoginDto)
+  async create(@Body() createLoginDto: CreateLoginDto):Promise<Object> {
+    console.log(createLoginDto)
+    return await this.loginService.login(createLoginDto)
   }
 
   @Get()
