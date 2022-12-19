@@ -15,3 +15,9 @@ datasource:
   charset: utf8mb4
   loc: Asia/Shanghai
   logging: true
+
+# 初始化数据
+user:
+  username: admin
+  password: 123456
+  nickname: 系统管理员
