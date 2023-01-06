@@ -12,6 +12,8 @@ export class LoginService {
   ) {}
   async login(createLoginDto: CreateLoginDto) {
     const { username, password } = createLoginDto
+    console.log(username, password)
+    // TODO: 待开发验证用户名密码是否正确
     const user = await this.userEntity.findOne({ where: { username } })
     const token = '123456'
     const result = Object.assign(user)
