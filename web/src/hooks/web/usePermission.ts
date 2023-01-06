@@ -29,14 +29,6 @@ export function usePermission() {
       }
       return (intersection(value, userStore.getRoleList) as RoleEnum[]).length > 0
     }
-
-    if (PermissionModeEnum.BACK === permMode) {
-      const allCodeList = permissionStore.getPermCodeList as string[]
-      if (!isArray(value)) {
-        return allCodeList.includes(value)
-      }
-      return (intersection(value, allCodeList) as string[]).length > 0
-    }
     return true
   }
 
