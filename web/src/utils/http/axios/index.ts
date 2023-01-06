@@ -6,7 +6,7 @@ import { clone } from 'lodash-es'
 import type { RequestOptions, Result } from '/#/axios'
 import type { AxiosTransform, CreateAxiosOptions } from './axiosTransform'
 import { VAxios } from './Axios'
-import { checkStatus } from './checkStatus'
+// import { checkStatus } from './checkStatus'
 import { useGlobSetting } from '@/hooks/setting'
 import { useMessage } from '@/hooks/web/useMessage'
 import { RequestEnum, ResultEnum, ContentTypeEnum } from '@/enums/httpEnum'
@@ -30,7 +30,7 @@ const transform: AxiosTransform = {
    * @description: 处理响应数据。如果数据不是预期格式，可直接抛出错误
    */
   transformResponseHook: (res: AxiosResponse<Result>, options: RequestOptions) => {
-    console.log(res, '00000res');
+    console.log(res, '00000res')
     const { isTransformResponse, isReturnNativeResponse } = options
     // 是否返回原生响应头 比如：需要获取响应头时使用该属性
     if (isReturnNativeResponse) {
@@ -164,12 +164,12 @@ const transform: AxiosTransform = {
    * @description: 响应错误处理
    */
   responseInterceptorsCatch: (axiosInstance: AxiosResponse, error: any) => {
-    console.log(error, 'responseInterceptorsCatch');
-    const { response, code, message, config, request } = error || {}
+    console.log(error, 'responseInterceptorsCatch')
+    const { code, message, config, request } = error || {}
     const errorMessageMode = config?.requestOptions?.errorMessageMode || 'none'
     let errMessage: string = request.responseText ?? ''
     const err: string = error?.toString?.() ?? ''
-    console.log(errMessage);
+    console.log(errMessage)
     try {
       if (code === 'ECONNABORTED' && message.indexOf('timeout') !== -1) {
         errMessage = '接口请求超时，请刷新重试'
@@ -179,12 +179,12 @@ const transform: AxiosTransform = {
       }
 
       if (errMessage) {
-        console.log(1);
+        console.log(1)
         if (errorMessageMode === 'modal') {
-          console.log(2);
+          console.log(2)
           createErrorModal({ title: '错误提示', content: errMessage })
         } else if (errorMessageMode === 'message') {
-          console.log(3);
+          console.log(3)
           createMessage.error(errMessage)
         } else {
           return Promise.reject(error)

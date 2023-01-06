@@ -8,7 +8,7 @@ import {
 // ! You need to clear the browser cache after the change
 const setting: ProjectConfig = {
   // Permission mode
-  permissionMode: PermissionModeEnum.BACK,
+  permissionMode: PermissionModeEnum.ROUTE_MAPPING,
 
   // Permission-related cache is stored in sessionStorage or localStorage
   permissionCacheType: CacheTypeEnum.LOCAL,
