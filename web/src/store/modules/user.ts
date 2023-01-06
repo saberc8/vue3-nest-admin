@@ -1,5 +1,4 @@
 import type { UserInfo } from '/#/store'
-import type { ErrorMessageMode } from '/#/axios'
 import { defineStore } from 'pinia'
 import { store } from '@/store'
 import { RoleEnum } from '@/enums/roleEnum'
@@ -85,15 +84,13 @@ export const useUserStore = defineStore({
     async login(
       params: LoginParams & {
         goHome?: boolean
-        mode?: ErrorMessageMode
       },
     ): Promise<GetUserInfoModel | null> {
       try {
-        const { goHome = true, mode, ...loginParams } = params
-        const data = await loginApi(loginParams, mode)
+        const { goHome = true, ...loginParams } = params
+        const data = await loginApi(loginParams)
+        console.log(data, 'data')
         const { token } = data
-
-        // save token
         this.setToken(token)
         return this.afterLoginAction(goHome)
       } catch (error) {
@@ -104,7 +101,6 @@ export const useUserStore = defineStore({
       if (!this.getToken) return null
       // get user info
       const userInfo = await this.getUserInfoAction()
-
       const sessionTimeout = this.sessionTimeout
       if (sessionTimeout) {
         this.setSessionTimeout(false)

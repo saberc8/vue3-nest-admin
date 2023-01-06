@@ -13,6 +13,13 @@ export class UserController {
     return await this.userService.create(createUserDto)
   }
 
+  @Get('getUserInfo')
+  getUserInfo() {
+    return {
+      name: 'admin',
+    }
+  }
+
   @Get()
   findAll() {
     return this.userService.findUserList()

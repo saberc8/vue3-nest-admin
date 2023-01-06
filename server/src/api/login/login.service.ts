@@ -9,11 +9,16 @@ export class LoginService {
   constructor(
     @InjectRepository(UserEntity)
     public readonly userEntity: Repository<UserEntity>,
-  ){}
-  async login(createLoginDto: CreateLoginDto): Promise<Object> {
+  ) {}
+  async login(createLoginDto: CreateLoginDto) {
     const { username, password } = createLoginDto
-    const user = this.userEntity.findOne({where: {username}})
-    return user
+    const user = await this.userEntity.findOne({ where: { username } })
+    const token = '123456'
+    const result = Object.assign(user)
+
+    result.token = token
+    console.log(result)
+    return result
   }
 
   findAll() {

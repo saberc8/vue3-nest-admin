@@ -74,8 +74,8 @@
       const userInfo = await userStore.login({
         password: data.password,
         username: data.account,
-        mode: 'none', //不要默认的错误提示
       })
+      console.log(userInfo, 'userInfo')
       if (userInfo) {
         notification.success({
           message: '登录成功',
