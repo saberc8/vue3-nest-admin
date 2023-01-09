@@ -5,6 +5,8 @@ rbac服务端
 nest g resource [接口前缀名] [所在目录]
 nest g resource interface api
 
+nest g resource role api --no-spec
+
 Server  
 ├─ README.md  
 ├─ src  
