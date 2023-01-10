@@ -9,18 +9,16 @@
       <span style="font-weight: bold; font-size: 20px; color: #000">系统菜单表单</span>
     </template>
     <template #toolbar_buttons>
-      <a-button type="primary">新增0</a-button>
-    </template>
-    <template #img1_default="{ row }">
-      <img v-if="row.img1" :src="row.img1" style="width: 100px" />
-      <span v-else>无</span>
+      <a-button type="primary">新增</a-button>
     </template>
   </ProTable>
+  <a-tag>1</a-tag>
 </template>
 <script lang="ts" setup>
   import ProTable from '@/components/ProTable/index.vue'
   import { getMenuList } from '@/api/sys/menu'
   import { VxeGridPropTypes } from 'vxe-table'
+  import { createVNode } from 'vue'
   // import { RouteItem } from '@/api/sys/model/menuModel'
 
   // interface searchItem {
@@ -47,18 +45,24 @@
     { field: 'icon', title: '图标' },
     { field: 'frameSrc', title: '内嵌iframe' },
     { field: 'ignoreKeepAlive', title: '是否缓存' },
-    // {
-    //   field: 'address',
-    //   title: 'Address',
-    //   showOverflow: true,
-    //   showHeaderOverflow: true,
-    //   width: 200,
-    //   // slots: {
-    //   //   default: ({ row }) => {
-    //   //     return <span>{row.address}</span>
-    //   //   },
-    //   // },
-    // },
+    {
+      field: 'address',
+      title: 'Address',
+      showOverflow: true,
+      showHeaderOverflow: true,
+      width: 200,
+      slots: {
+        default: ({ row }) => {
+          return createVNode(
+            resolveComponent('a-tag'),
+            {
+              color: 'pink',
+            },
+            () => row.title,
+          )
+        },
+      },
+    },
   ]
 
   const showForm = true
