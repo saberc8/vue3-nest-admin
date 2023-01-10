@@ -1,6 +1,6 @@
 import { SharedEntity } from '@src/shared/entities/base.entity'
 import { Entity, Column, Index } from 'typeorm'
-import { Expose } from 'class-transformer'
+import { Expose, Exclude } from 'class-transformer'
 
 @Entity('user')
 export class UserEntity extends SharedEntity {
@@ -17,11 +17,11 @@ export class UserEntity extends SharedEntity {
   })
   username!: string
 
+  @Exclude({ toPlainOnly: true })
   @Column({
     type: 'varchar',
     length: 100,
     name: 'password',
-    select: false,
     comment: '密码',
   })
   password!: string

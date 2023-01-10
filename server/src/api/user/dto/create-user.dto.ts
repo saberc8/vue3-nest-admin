@@ -11,7 +11,7 @@ export class CreateUserDto {
 
   @IsString({ message: '确认密码必须为字符类' })
   @IsNotEmpty({ message: '确认密码不能为空' })
-  readonly password!: string
+  password!: string
 
   @IsEqual('password')
   @IsString({ message: '确认密码必须为字符类' })

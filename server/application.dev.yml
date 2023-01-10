@@ -11,7 +11,7 @@ datasource:
   port: 3306
   database: nestjs-rbac
   username: root
-  password: junmoxiao1122
+  password: 123456
   charset: utf8mb4
   loc: Asia/Shanghai
   logging: true
