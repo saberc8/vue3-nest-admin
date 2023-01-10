@@ -22,24 +22,20 @@ export class MenuService {
       name,
       title,
       path,
-      icon,
       component,
       redirect,
       pid,
-      orderNo,
       frameSrc,
       ignoreKeepAlive,
     } = findMenuDto
-    // where 搜索
+    // where 模糊搜索
     const where = {
       ...(!!name ? { name: Like(`%${name}%`) } : null),
       ...(!!title ? { title: Like(`%${title}%`) } : null),
       ...(!!path ? { path: Like(`%${path}%`) } : null),
-      ...(!!icon ? { icon: Like(`%${icon}%`) } : null),
       ...(!!component ? { component: Like(`%${component}%`) } : null),
       ...(!!redirect ? { redirect: Like(`%${redirect}%`) } : null),
       ...(!!pid ? { pid } : null),
-      ...(!!orderNo ? { orderNo } : null),
       ...(!!frameSrc ? { frameSrc: Like(`%${frameSrc}%`) } : null),
       ...(!!ignoreKeepAlive ? { ignoreKeepAlive } : null),
     }

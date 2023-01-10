@@ -1,5 +1,5 @@
 <template>
-  <a-card><ProForm /></a-card>
+  <a-card><ProForm :searchForm="searchForm" /></a-card>
   <a-card class="margin-top-10"><ProBody :columns="columns" :dataSource="dataSource" /></a-card>
 </template>
 

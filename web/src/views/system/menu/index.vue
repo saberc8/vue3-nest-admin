@@ -10,6 +10,20 @@
   import ProTable from '@/components/ProTable/index.vue'
   import { getMenuList } from '@/api/sys/menu'
   // import { RouteItem } from '@/api/sys/model/menuModel'
+
+  // interface searchItem {
+  //   page: number
+  //   size: number
+  //   name: string
+  //   title: string
+  //   path: string
+  //   component: string
+  //   redirect: string
+  //   pid: number
+  //   orderNo: number
+  //   frameSrc: string
+  //   ignoreKeepAlive: boolean
+  // }
   const columns = [
     { type: 'seq', width: 50 },
     { field: 'title', title: '标题' },
@@ -31,7 +45,39 @@
       field: 'name',
       type: 'input',
       componentProps: {
-        placeholder: '请输入',
+        placeholder: '请输入名称',
+      },
+    },
+    {
+      label: '菜单标题',
+      field: 'title',
+      type: 'input',
+      componentProps: {
+        placeholder: '请输入菜单标题',
+      },
+    },
+    {
+      label: '组件路径',
+      field: 'path',
+      type: 'input',
+      componentProps: {
+        placeholder: '请输入路由',
+      },
+    },
+    {
+      label: '名称',
+      field: 'component',
+      type: 'input',
+      componentProps: {
+        placeholder: '请输入组件路径',
+      },
+    },
+    {
+      label: '父级id',
+      field: 'pid',
+      type: 'input',
+      componentProps: {
+        placeholder: '请输入父级id',
       },
     },
   ]

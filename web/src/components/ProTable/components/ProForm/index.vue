@@ -7,14 +7,14 @@
     @finish="onFinish"
   >
     <a-row :gutter="24">
-      <template v-for="i in 14" :key="i">
-        <a-col v-show="expand || i <= 3" :xxl="6" :xl="8" :sm="12" :xs="24">
-          <a-form-item :name="`field-${i}`" :label="`field-${i}`">
+      <template v-for="(item, index) in searchForm" :key="index">
+        <a-col v-show="expand || index <= 3" :xxl="6" :xl="8" :sm="12" :xs="24">
+          <a-form-item :name="item.field" :label="item.label">
             <a-input
-              v-model:value="formState[`field-${i}`]"
-              placeholder="placeholder"
+              v-model:value="formState[`${item.field}`]"
+              :placeholder="item.componentProps.placeholder"
               :allowClear="true"
-            ></a-input>
+            />
           </a-form-item>
         </a-col>
       </template>
@@ -39,6 +39,10 @@
 </template>
 <script lang="ts" setup>
   import { DownOutlined, UpOutlined } from '@ant-design/icons-vue'
+  const props = defineProps<{
+    searchForm: Array<any>
+  }>()
+  console.log(props, 'pro-form')
   const expand = ref(false)
   const proFromRef = ref()
   const formState = reactive({})
