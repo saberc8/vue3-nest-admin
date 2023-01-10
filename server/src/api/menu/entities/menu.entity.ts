@@ -47,4 +47,20 @@ export class MenuEntity extends SharedEntity {
     comment: '菜单重定向',
   })
   redirect!: string
+
+  @Column({
+    type: 'int',
+    name: 'parent_id',
+    default: '0',
+    comment: '父级菜单id',
+  })
+  parentId!: number
+
+  @Column({
+    type: 'tinyint',
+    name: 'is_show',
+    default: '1',
+    comment: '是否显示1表示显示,0表示不显示',
+  })
+  isShow!: number
 }

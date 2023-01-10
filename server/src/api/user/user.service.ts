@@ -54,8 +54,9 @@ export class UserService {
       if (checkPassword) {
         // jwt token
         const data = this.genToken({ id: user.id })
+        const token = data.accessToken
         console.log(data, '---')
-        return user
+        return Object.assign({ token }, user)
       } else {
         throw new HttpException('密码错误', 201)
       }

@@ -1,26 +1,31 @@
 import { Injectable } from '@nestjs/common'
 import { CreateMenuDto } from './dto/create-menu.dto'
-import { UpdateMenuDto } from './dto/update-menu.dto'
-
+import { FindMenuDto } from './dto/find-menu.dto'
+import { InjectRepository } from '@nestjs/typeorm'
+import { Repository } from 'typeorm'
+import { MenuEntity } from './entities/menu.entity'
 @Injectable()
 export class MenuService {
-  create(createMenuDto: CreateMenuDto) {
-    return 'This action adds a new menu'
+  constructor(
+    @InjectRepository(MenuEntity)
+    private readonly menuEntity: Repository<MenuEntity>,
+  ) {}
+
+  async add(createMenuDto: CreateMenuDto) {
+    return await this.menuEntity.save(createMenuDto)
   }
 
-  findAll() {
-    return `This action returns all menu`
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} menu`
-  }
-
-  update(id: number, updateMenuDto: UpdateMenuDto) {
-    return `This action updates a #${id} menu`
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} menu`
+  async getMenuList(findMenuDto: FindMenuDto) {
+    console.log(findMenuDto, '-=-')
+    const { page = 1, size = 10 } = findMenuDto
+    const result = await this.menuEntity.findAndCount({
+      order: {
+        id: 'ASC',
+      },
+      skip: (page - 1) * size,
+      take: size,
+    })
+    console.log(result)
+    return Object.assign({ total: result[1] }, { list: result[0] })
   }
 }

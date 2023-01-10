@@ -25,9 +25,7 @@ export class UserController {
   }
 
   @Get('getUserInfo')
-  getUserInfo() {
-    return {
-      name: 'admin',
-    }
+  async getUserInfo() {
+    return await this.userService.findUserList()
   }
 }
