@@ -1,14 +1,15 @@
 import { SharedEntity } from '@src/shared/entities/base.entity'
 import { Entity, Column, Index } from 'typeorm'
 import { Expose, Exclude } from 'class-transformer'
-
+import { ApiProperty } from '@nestjs/swagger'
 @Entity('user')
 export class UserEntity extends SharedEntity {
   constructor() {
     super()
   }
-
+  @ApiProperty({ description: 'id' })
   @Index()
+  @ApiProperty({ description: '用户名' })
   @Column({
     type: 'varchar',
     length: 50,
@@ -17,6 +18,7 @@ export class UserEntity extends SharedEntity {
   })
   username!: string
 
+  @ApiProperty({ description: '密码' })
   @Exclude({ toPlainOnly: true })
   @Column({
     type: 'varchar',
