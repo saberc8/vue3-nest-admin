@@ -11,11 +11,16 @@
     <template #toolbar_buttons>
       <a-button type="primary">新增0</a-button>
     </template>
+    <template #img1_default="{ row }">
+      <img v-if="row.img1" :src="row.img1" style="width: 100px" />
+      <span v-else>无</span>
+    </template>
   </ProTable>
 </template>
 <script lang="ts" setup>
   import ProTable from '@/components/ProTable/index.vue'
   import { getMenuList } from '@/api/sys/menu'
+  import { VxeGridPropTypes } from 'vxe-table'
   // import { RouteItem } from '@/api/sys/model/menuModel'
 
   // interface searchItem {
@@ -31,7 +36,7 @@
   //   frameSrc: string
   //   ignoreKeepAlive: boolean
   // }
-  const columns = [
+  const columns: VxeGridPropTypes.Columns = [
     { type: 'seq', width: 50 },
     { field: 'title', title: '标题' },
     { field: 'name', title: '名称' },
@@ -42,6 +47,18 @@
     { field: 'icon', title: '图标' },
     { field: 'frameSrc', title: '内嵌iframe' },
     { field: 'ignoreKeepAlive', title: '是否缓存' },
+    // {
+    //   field: 'address',
+    //   title: 'Address',
+    //   showOverflow: true,
+    //   showHeaderOverflow: true,
+    //   width: 200,
+    //   // slots: {
+    //   //   default: ({ row }) => {
+    //   //     return <span>{row.address}</span>
+    //   //   },
+    //   // },
+    // },
   ]
 
   const showForm = true
