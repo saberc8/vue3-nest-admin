@@ -22,7 +22,7 @@ export function loginApi(params: LoginParams) {
  * @description: getUserInfo
  */
 export function getUserInfo() {
-  return defHttp.get<GetUserInfoModel>({ url: Api.GetUserInfo }, { errorMessageMode: 'none' })
+  return defHttp.get<GetUserInfoModel>({ url: Api.GetUserInfo })
 }
 
 export function doLogout() {

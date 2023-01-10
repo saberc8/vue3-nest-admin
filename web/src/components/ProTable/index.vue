@@ -8,8 +8,8 @@
   import ProBody from './components/ProBody/index.vue'
   const props = defineProps<{
     dataSource: {
-      type: Object
-      default: {}
+      type: Array<any>
+      default: []
     }
     columns: Array<any>
     searchForm: Array<any>

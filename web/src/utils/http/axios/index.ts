@@ -171,6 +171,14 @@ const transform: AxiosTransform = {
     const err: string = error?.toString?.() ?? ''
     console.log(errMessage)
     try {
+      if (code === 'ERR_BAD_REQUEST') {
+        errMessage = 'token过期'
+        createMessage.error(errMessage)
+        const userStore = useUserStoreWithOut()
+        userStore.setToken(undefined)
+        userStore.logout(true)
+        return
+      }
       if (code === 'ECONNABORTED' && message.indexOf('timeout') !== -1) {
         errMessage = '接口请求超时，请刷新重试'
       }
@@ -181,10 +189,8 @@ const transform: AxiosTransform = {
       if (errMessage) {
         console.log(1)
         if (errorMessageMode === 'modal') {
-          console.log(2)
           createErrorModal({ title: '错误提示', content: errMessage })
         } else if (errorMessageMode === 'message') {
-          console.log(3)
           createMessage.error(errMessage)
         } else {
           return Promise.reject(error)
@@ -250,7 +256,7 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
           // 是否携带token
           withToken: true,
           retryRequest: {
-            isOpenRetry: true,
+            isOpenRetry: false,
             count: 5,
             waitTime: 100,
           },

@@ -11,17 +11,16 @@ const iframe: AppRouteModule = {
   meta: {
     orderNo: 1000,
     icon: 'ion:tv-outline',
-    title: 'iframe',
+    title: '相关文档',
   },
-
   children: [
     {
       path: 'doc',
       name: 'Doc',
       component: IFrame,
       meta: {
-        frameSrc: 'https://doc.vvbin.cn',
-        title: 'Doc',
+        frameSrc: 'http://127.0.0.1:2023/docs',
+        title: '接口文档',
       },
     },
     {

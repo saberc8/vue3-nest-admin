@@ -13,4 +13,12 @@ export interface RouteItem {
 /**
  * @description: Get menu return value
  */
-export type getMenuListResultModel = RouteItem[]
+export type getMenuListResultModel = {
+  list: RouteItem[]
+  total: number
+}
+
+export interface GetMenuListModel {
+  page: number
+  size: number
+}

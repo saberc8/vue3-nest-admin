@@ -23,19 +23,6 @@
   console.log(props.dataSource, 'pro-body-dataSource')
   console.log(props.columns, 'pro-body-columns')
   let data: any = []
-  watch(
-    () => props.dataSource,
-    (val: any) => {
-      data = val
-      gridOptions.data = data
-    },
-  )
-  watch(
-    () => props.columns,
-    (val) => {
-      gridOptions.columns = val
-    },
-  )
   const gridOptions = reactive<VxeGridProps>({
     border: true,
     align: null,
@@ -50,4 +37,19 @@
     },
     data,
   })
+  watch(
+    () => props.dataSource,
+    (val: any) => {
+      console.log('val', val)
+      data = val
+      gridOptions.data = data
+    },
+    { immediate: true },
+  )
+  watch(
+    () => props.columns,
+    (val) => {
+      gridOptions.columns = val
+    },
+  )
 </script>
