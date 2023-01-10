@@ -9,7 +9,7 @@ const dashboard: AppRouteModule = {
   meta: {
     orderNo: 10,
     icon: 'ion:grid-outline',
-    title: '仪表盘',
+    title: '项目介绍',
   },
   children: [
     {
@@ -17,7 +17,7 @@ const dashboard: AppRouteModule = {
       name: 'Workbench',
       component: () => import('@/views/dashboard/workbench/index.vue'),
       meta: {
-        title: '工作台',
+        title: '项目介绍',
       },
     },
   ],

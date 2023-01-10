@@ -12,7 +12,15 @@
   // import { RouteItem } from '@/api/sys/model/menuModel'
   const columns = [
     { type: 'seq', width: 50 },
-    { field: 'name', title: 'name' },
+    { field: 'title', title: '标题' },
+    { field: 'name', title: '名称' },
+    { field: 'path', title: '路由' },
+    { field: 'component', title: '组件' },
+    { field: 'redirect', title: '父级定向' },
+    { field: 'orderNo', title: '排序' },
+    { field: 'icon', title: '图标' },
+    { field: 'frameSrc', title: '内嵌iframe' },
+    { field: 'ignoreKeepAlive', title: '是否缓存' },
   ]
 
   const showForm = true
