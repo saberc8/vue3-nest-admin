@@ -90,7 +90,6 @@ export class MenuEntity extends SharedEntity {
 
   @Column({
     type: 'boolean',
-    length: 50,
     name: 'ignore_keep_alive',
     default: true,
     comment: '是否缓存',

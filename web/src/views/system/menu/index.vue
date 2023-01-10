@@ -27,7 +27,7 @@
   // 搜索区域
   const searchForm = [
     {
-      label: '姓名',
+      label: '名称',
       field: 'name',
       type: 'input',
       componentProps: {
