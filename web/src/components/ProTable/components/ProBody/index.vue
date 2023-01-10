@@ -2,9 +2,10 @@
   <div>
     <vxe-grid v-bind="gridOptions">
       <template #toolbar_buttons>
-        <a-button @click="gridOptions.align = 'left'">居左</a-button>
-        <a-button @click="gridOptions.align = 'center'">居中</a-button>
-        <a-button @click="gridOptions.align = 'right'">居右</a-button>
+        <slot name="toolbar_title"></slot>
+      </template>
+      <template #toolbar_tools>
+        <slot name="toolbar_buttons"></slot>
       </template>
     </vxe-grid>
   </div>
@@ -33,6 +34,7 @@
     toolbarConfig: {
       slots: {
         buttons: 'toolbar_buttons',
+        tools: 'toolbar_tools',
       },
     },
     data,
@@ -53,3 +55,5 @@
     },
   )
 </script>
+
+<style scoped></style>

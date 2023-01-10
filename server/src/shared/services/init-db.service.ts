@@ -10,7 +10,7 @@ export class InitDbService {
     @InjectRepository(UserEntity)
     private readonly userEntity: Repository<UserEntity>,
     private readonly configService: ConfigService,
-    private readonly userService: UserService
+    private readonly userService: UserService,
   ) {}
 
   onModuleInit() {
@@ -27,12 +27,6 @@ export class InitDbService {
       },
     })
     if (!user) {
-      await this.userEntity.save({
-        username,
-        password,
-        nickname,
-        isSuper: 1,
-      })
       await this.userService.create({
         username,
         password,

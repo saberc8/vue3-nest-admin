@@ -4,7 +4,14 @@
     :columns="columns"
     :searchForm="searchForm"
     :showForm="showForm"
-  />
+  >
+    <template #toolbar_title>
+      <span style="font-weight: bold; font-size: 20px; color: #000">系统菜单表单</span>
+    </template>
+    <template #toolbar_buttons>
+      <a-button type="primary">新增0</a-button>
+    </template>
+  </ProTable>
 </template>
 <script lang="ts" setup>
   import ProTable from '@/components/ProTable/index.vue'

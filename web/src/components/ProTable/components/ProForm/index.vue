@@ -42,6 +42,7 @@
   const props = defineProps<{
     searchForm: Array<any>
   }>()
+  const emit = defineEmits(['searchData'])
   console.log(props, 'pro-form')
   const expand = ref(false)
   const proFromRef = ref()
@@ -49,6 +50,8 @@
   const onFinish = (values: any) => {
     console.log('Received values of form: ', values)
     console.log('formState: ', formState)
+    emit('searchData', values)
+    inject(values)
   }
 </script>
 <style>

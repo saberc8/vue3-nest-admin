@@ -89,7 +89,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
         less: {
           modifyVars: {
             'primary-color': '#1677ff',
-            'link-color': '#1DA57A',
+            'link-color': '#1677ff',
             'border-radius-base': '4px',
           },
           javascriptEnabled: true,

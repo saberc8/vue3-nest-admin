@@ -1,6 +1,15 @@
 <template>
   <a-card><ProForm :searchForm="searchForm" /></a-card>
-  <a-card class="margin-top-10"><ProBody :columns="columns" :dataSource="dataSource" /></a-card>
+  <a-card class="margin-top-10">
+    <ProBody :columns="columns" :dataSource="dataSource">
+      <template #toolbar_buttons>
+        <slot name="toolbar_buttons"></slot>
+      </template>
+      <template #toolbar_title>
+        <slot name="toolbar_title"></slot>
+      </template>
+    </ProBody>
+  </a-card>
 </template>
 
 <script lang="ts" setup>
