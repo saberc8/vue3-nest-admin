@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body } from '@nestjs/common'
+import { Controller, Get, Post, Body, Query } from '@nestjs/common'
 import { UserService } from './user.service'
 import { CreateUserDto } from './dto/create-user.dto'
 import { UserLoginDto } from './dto/user-login.dto'
+import { FindUserDto } from './dto/find-user.dto'
 import { UserEntity } from './entities/user.entity'
 import { ApiTags, ApiOperation, ApiBody, ApiExtraModels, ApiBearerAuth } from '@nestjs/swagger'
 
@@ -26,6 +27,11 @@ export class UserController {
 
   @Get('getUserInfo')
   async getUserInfo() {
-    return await this.userService.findUserList()
+    return await this.userService.findUserInfo()
+  }
+
+  @Get('list')
+  async getUserList(@Query() findUserDto: FindUserDto) {
+    return await this.userService.findUserList(findUserDto)
   }
 }

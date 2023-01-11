@@ -27,9 +27,6 @@
     gridOtherOptions: Object
   }>()
   const emit = defineEmits(['reloadData'])
-  console.log(props, 'pro-body')
-  console.log(props.dataSource, 'pro-body-dataSource')
-  console.log(props.columns, 'pro-body-columns')
   const xGrid = ref<VxeGridInstance>()
   let data: any = []
   const gridOptions = reactive<VxeGridProps>({

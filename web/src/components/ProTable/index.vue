@@ -33,13 +33,9 @@
     gridOptions: Object
     params: Object
   }>()
-  console.log(props, 'pro-table')
-  // console.log(props.dataSource, 'pro-table-dataSource')
-  // console.log(props.columns, 'pro-table-columns')
   const data = ref([])
   const renderTable = (func: Function, params: Object) => {
     func(params).then((res) => {
-      console.log(res, 'getListFunc')
       data.value = res.list
     })
   }
@@ -47,11 +43,9 @@
     renderTable(props.getListFunc, props.params)
   }
   const reloadData = () => {
-    console.log('reload')
     renderTable(props.getListFunc, props.params)
   }
   const searchData = (e) => {
-    console.log(e, '---')
     const params = {
       ...props.params,
       ...e,

@@ -1,6 +1,7 @@
 import { Injectable, HttpException } from '@nestjs/common'
 import { CreateUserDto } from './dto/create-user.dto'
 import { UserLoginDto } from './dto/user-login.dto'
+import { FindUserDto } from './dto/find-user.dto'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 import { UserEntity } from './entities/user.entity'
@@ -63,10 +64,26 @@ export class UserService {
     }
   }
 
-  async findUserList(): Promise<any> {
+  async findUserInfo(): Promise<any> {
     return await this.userEntity.find()
   }
 
+  async findUserList(findUserDto: FindUserDto) {
+    const { page = 1, size = 10, username } = findUserDto
+    // where 模糊搜索
+    const where = {
+      ...(!!username ? { username } : null),
+    }
+    const result = await this.userEntity.findAndCount({
+      where,
+      order: {
+        id: 'ASC',
+      },
+      skip: (page - 1) * size,
+      take: size,
+    })
+    return Object.assign({ total: result[1] }, { list: result[0] })
+  }
   /**
    * 生成 token 与 刷新 token
    * @param payload
