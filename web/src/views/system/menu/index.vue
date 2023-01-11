@@ -4,38 +4,35 @@
     :columns="columns"
     :searchForm="searchForm"
     :showForm="showForm"
+    :getListFunc="getListFunc"
   >
     <template #toolbar_title>
       <span style="font-weight: bold; font-size: 20px; color: #000">系统菜单表单</span>
     </template>
     <template #toolbar_buttons>
-      <a-button type="primary">新增</a-button>
+      <a-button type="primary" @click="addMenuData">
+        <template #icon><PlusOutlined /></template>
+        新增
+      </a-button>
     </template>
   </ProTable>
-  <a-tag>1</a-tag>
+  <add-menu :visible="visible" :title="title" @close-modal="closeModal" @refresh="refreshTable" />
 </template>
 <script lang="ts" setup>
   import ProTable from '@/components/ProTable/index.vue'
   import { getMenuList } from '@/api/sys/menu'
   import { VxeGridPropTypes } from 'vxe-table'
   import { createVNode } from 'vue'
-  // import { RouteItem } from '@/api/sys/model/menuModel'
+  import { PlusOutlined } from '@ant-design/icons-vue'
+  import addMenu from './components/addMenu.vue'
 
-  // interface searchItem {
-  //   page: number
-  //   size: number
-  //   name: string
-  //   title: string
-  //   path: string
-  //   component: string
-  //   redirect: string
-  //   pid: number
-  //   orderNo: number
-  //   frameSrc: string
-  //   ignoreKeepAlive: boolean
-  // }
+  const visible = ref<Boolean>(false)
+  const title = '新增菜单'
+  const getListFunc = getMenuList
   const columns: VxeGridPropTypes.Columns = [
     { type: 'seq', width: 50 },
+    { field: 'id', title: 'ID', width: 80 },
+    { field: 'pid', title: 'PID', width: 80 },
     { field: 'title', title: '标题' },
     { field: 'name', title: '名称' },
     { field: 'path', title: '路由' },
@@ -112,13 +109,28 @@
 
   const params = {
     page: 1,
-    size: 10,
+    size: 50,
   }
   let dataSource = ref<any>([])
   const renderMenuList = async (params) => {
     const res = await getMenuList(params)
     console.log(res, '--')
     dataSource.value = res.list
+    console.log(dataSource.value, 'dataSource----')
   }
   renderMenuList(params)
+
+  const addMenuData = () => {
+    console.log('addMenuData')
+    visible.value = true
+  }
+
+  const closeModal = () => {
+    visible.value = false
+  }
+
+  const refreshTable = () => {
+    renderMenuList(params)
+    closeModal()
+  }
 </script>

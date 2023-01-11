@@ -1,5 +1,7 @@
 import type { RouteMeta } from 'vue-router'
 export interface RouteItem {
+  id: string
+  idd: number
   path: string
   component: any
   meta: RouteMeta
@@ -21,4 +23,8 @@ export type getMenuListResultModel = {
 export interface GetMenuListModel {
   page: number
   size: number
+}
+
+export interface AddMenuModel {
+  name: string
 }

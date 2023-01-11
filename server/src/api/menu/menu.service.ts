@@ -42,7 +42,7 @@ export class MenuService {
     const result = await this.menuEntity.findAndCount({
       where,
       order: {
-        id: 'ASC',
+        id: 'DESC',
       },
       skip: (page - 1) * size,
       take: size,

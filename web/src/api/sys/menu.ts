@@ -1,8 +1,9 @@
 import { defHttp } from '@/utils/http/axios'
-import { getMenuListResultModel, GetMenuListModel } from './model/menuModel'
+import { getMenuListResultModel, GetMenuListModel, AddMenuModel } from './model/menuModel'
 
 enum Api {
   GetMenuList = '/menu/list',
+  AddMenu = '/menu/add',
 }
 
 /**
@@ -11,4 +12,8 @@ enum Api {
 
 export const getMenuList = (params: GetMenuListModel) => {
   return defHttp.get<getMenuListResultModel>({ url: Api.GetMenuList, params })
+}
+
+export const addMenu = (params: AddMenuModel) => {
+  return defHttp.post({ url: Api.AddMenu, params })
 }
