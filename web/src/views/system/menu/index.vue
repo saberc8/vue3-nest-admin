@@ -5,6 +5,7 @@
     :searchForm="searchForm"
     :showForm="showForm"
     :getListFunc="getListFunc"
+    :gridOptions="gridOptions"
   >
     <template #toolbar_title>
       <span style="font-weight: bold; font-size: 20px; color: #000">系统菜单表单</span>
@@ -30,7 +31,11 @@
   const title = '新增菜单'
   const getListFunc = getMenuList
   const columns: VxeGridPropTypes.Columns = [
-    { type: 'seq', width: 50 },
+    {
+      type: 'seq',
+      width: 100,
+      treeNode: true, // 树图表
+    },
     { field: 'id', title: 'ID', width: 80 },
     { field: 'pid', title: 'PID', width: 80 },
     { field: 'title', title: '标题' },
@@ -41,26 +46,39 @@
     { field: 'orderNo', title: '排序' },
     { field: 'icon', title: '图标' },
     { field: 'frameSrc', title: '内嵌iframe' },
-    { field: 'ignoreKeepAlive', title: '是否缓存' },
     {
-      field: 'address',
-      title: 'Address',
+      field: 'ignoreKeepAlive',
+      title: '是否缓存',
       showOverflow: true,
       showHeaderOverflow: true,
-      width: 200,
+      width: 100,
       slots: {
         default: ({ row }) => {
           return createVNode(
             resolveComponent('a-tag'),
             {
-              color: 'pink',
+              color: row.ignoreKeepAlive ? 'pink' : 'green',
             },
-            () => row.title,
+            () => (row.ignoreKeepAlive ? '否' : '是'),
           )
         },
       },
     },
   ]
+  // 树状图表的示例
+  const gridOptions = {
+    treeConfig: {
+      transform: true,
+      rowField: 'id',
+      parentField: 'pid',
+    },
+    seqConfig: {
+      seqMethod: ({ row, rowIndex, column, columnIndex }) => {
+        console.log(row, rowIndex, column, columnIndex)
+        return row.pid === 0 ? rowIndex + 1 : ''
+      },
+    },
+  }
 
   const showForm = true
   // 搜索区域

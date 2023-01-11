@@ -1,7 +1,12 @@
 <template>
   <a-card><ProForm :searchForm="searchForm" /></a-card>
   <a-card class="margin-top-10">
-    <ProBody :columns="columns" :dataSource="dataSource" :getListFunc="getListFunc">
+    <ProBody
+      :columns="columns"
+      :dataSource="dataSource"
+      :getListFunc="getListFunc"
+      :gridOtherOptions="gridOptions"
+    >
       <template #toolbar_buttons>
         <slot name="toolbar_buttons"></slot>
       </template>
@@ -24,6 +29,7 @@
     searchForm: Array<any>
     showForm: Boolean
     getListFunc: Function
+    gridOptions: Object
   }>()
   console.log(props, 'pro-table')
   // console.log(props.dataSource, 'pro-table-dataSource')

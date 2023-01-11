@@ -28,6 +28,7 @@
     }
     columns: Array<any>
     getListFunc: Function
+    gridOtherOptions: Object
   }>()
   console.log(props, 'pro-body')
   console.log(props.dataSource, 'pro-body-dataSource')
@@ -54,15 +55,7 @@
       },
     },
     data,
-    treeConfig: {
-      transform: true,
-      rowField: 'id',
-      parentField: 'pid',
-      children: 'children',
-      // showIcon: false,
-      expandAll: true,
-      iconOpen: 'el-icon-folder-opened',
-    },
+    ...props.gridOtherOptions,
   })
 
   watch(
