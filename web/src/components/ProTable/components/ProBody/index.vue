@@ -22,25 +22,16 @@
   import { RedoOutlined } from '@ant-design/icons-vue'
   import { VxeGridInstance, VxeGridProps } from 'vxe-table'
   const props = defineProps<{
-    dataSource: {
-      type: Object
-      default: {}
-    }
+    dataSource: Array<any>
     columns: Array<any>
-    getListFunc: Function
     gridOtherOptions: Object
   }>()
+  const emit = defineEmits(['reloadData'])
   console.log(props, 'pro-body')
   console.log(props.dataSource, 'pro-body-dataSource')
   console.log(props.columns, 'pro-body-columns')
   const xGrid = ref<VxeGridInstance>()
   let data: any = []
-  if (typeof props.getListFunc === 'function') {
-    console.log(props.getListFunc, 'props.getListFunc')
-    // props.getListFunc().then((res) => {
-    //   console.log(res, 'getListFunc')
-    // })
-  }
   const gridOptions = reactive<VxeGridProps>({
     border: true,
     align: null,
@@ -76,14 +67,14 @@
 
   const reloadData = () => {
     console.log('redo')
-    console.log(data)
-    data.map((item) => {
-      item.children = []
-    })
-    const $grid = xGrid.value
-    if ($grid) {
-      $grid.reloadData(data)
-    }
+    emit('reloadData')
+    // data.map((item) => {
+    //   item.children = []
+    // })
+    // const $grid = xGrid.value
+    // if ($grid) {
+    //   $grid.reloadData(data)
+    // }
   }
 </script>
 

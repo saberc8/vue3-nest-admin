@@ -1,7 +1,9 @@
 <template>
   <ProTable
+    ref="proTable"
     :dataSource="dataSource"
     :columns="columns"
+    :params="params"
     :searchForm="searchForm"
     :showForm="showForm"
     :getListFunc="getListFunc"
@@ -26,15 +28,16 @@
   import { createVNode } from 'vue'
   import { PlusOutlined } from '@ant-design/icons-vue'
   import addMenu from './components/addMenu.vue'
-
+  const proTable = ref()
+  console.log(proTable.value, 'proTable')
   const visible = ref<Boolean>(false)
   const title = '新增菜单'
   const getListFunc = getMenuList
   const columns: VxeGridPropTypes.Columns = [
     {
       type: 'seq',
-      width: 100,
-      treeNode: true, // 树图表
+      width: 60,
+      treeNode: true, // 开启树图表
     },
     { field: 'id', title: 'ID', width: 80 },
     { field: 'pid', title: 'PID', width: 80 },
@@ -52,6 +55,7 @@
       showOverflow: true,
       showHeaderOverflow: true,
       width: 100,
+      align: 'center',
       slots: {
         default: ({ row }) => {
           return createVNode(
@@ -73,8 +77,7 @@
       parentField: 'pid',
     },
     seqConfig: {
-      seqMethod: ({ row, rowIndex, column, columnIndex }) => {
-        console.log(row, rowIndex, column, columnIndex)
+      seqMethod: ({ row, rowIndex }) => {
         return row.pid === 0 ? rowIndex + 1 : ''
       },
     },
@@ -125,10 +128,10 @@
     },
   ]
 
-  const params = {
+  const params = ref({
     page: 1,
     size: 50,
-  }
+  })
   let dataSource = ref<any>([])
   const renderMenuList = async (params) => {
     const res = await getMenuList(params)
@@ -136,7 +139,7 @@
     dataSource.value = res.list
     console.log(dataSource.value, 'dataSource----')
   }
-  renderMenuList(params)
+  // renderMenuList(params)
 
   const addMenuData = () => {
     console.log('addMenuData')

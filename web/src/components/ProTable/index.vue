@@ -1,11 +1,12 @@
 <template>
-  <a-card><ProForm :searchForm="searchForm" /></a-card>
+  <a-card><ProForm :searchForm="searchForm" @search-data="searchData" /></a-card>
   <a-card class="margin-top-10">
     <ProBody
+      ref="proBody"
       :columns="columns"
-      :dataSource="dataSource"
-      :getListFunc="getListFunc"
+      :dataSource="data"
       :gridOtherOptions="gridOptions"
+      @reload-data="reloadData"
     >
       <template #toolbar_buttons>
         <slot name="toolbar_buttons"></slot>
@@ -30,10 +31,33 @@
     showForm: Boolean
     getListFunc: Function
     gridOptions: Object
+    params: Object
   }>()
   console.log(props, 'pro-table')
   // console.log(props.dataSource, 'pro-table-dataSource')
   // console.log(props.columns, 'pro-table-columns')
+  const data = ref([])
+  const renderTable = (func: Function, params: Object) => {
+    func(params).then((res) => {
+      console.log(res, 'getListFunc')
+      data.value = res.list
+    })
+  }
+  if (typeof props.getListFunc === 'function') {
+    renderTable(props.getListFunc, props.params)
+  }
+  const reloadData = () => {
+    console.log('reload')
+    renderTable(props.getListFunc, props.params)
+  }
+  const searchData = (e) => {
+    console.log(e, '---')
+    const params = {
+      ...props.params,
+      ...e,
+    }
+    renderTable(props.getListFunc, params)
+  }
 </script>
 
 <style lang="less" scoped>
