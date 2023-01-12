@@ -19,6 +19,7 @@
 </template>
 
 <script lang="ts" setup>
+  import { defineExpose } from 'vue'
   import ProForm from './components/ProForm/index.vue'
   import ProBody from './components/ProBody/index.vue'
   const props = defineProps<{
@@ -34,6 +35,7 @@
     params: Object
   }>()
   const data = ref([])
+  const proBody = ref()
   const renderTable = (func: Function, params: Object) => {
     func(params).then((res) => {
       data.value = res.list
@@ -43,6 +45,7 @@
     renderTable(props.getListFunc, props.params)
   }
   const reloadData = () => {
+    console.log(proBody, 'proBody')
     renderTable(props.getListFunc, props.params)
   }
   const searchData = (e) => {
@@ -52,6 +55,10 @@
     }
     renderTable(props.getListFunc, params)
   }
+  defineExpose({
+    proBody,
+    reloadData,
+  })
 </script>
 
 <style lang="less" scoped>

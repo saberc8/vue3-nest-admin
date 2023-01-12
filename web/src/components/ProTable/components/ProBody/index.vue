@@ -19,6 +19,7 @@
 </template>
 
 <script lang="ts" setup>
+  import { defineExpose } from 'vue'
   import { RedoOutlined } from '@ant-design/icons-vue'
   import { VxeGridInstance, VxeGridProps } from 'vxe-table'
   const props = defineProps<{
@@ -28,6 +29,9 @@
   }>()
   const emit = defineEmits(['reloadData'])
   const xGrid = ref<VxeGridInstance>()
+  defineExpose({
+    xGrid,
+  })
   let data: any = []
   const gridOptions = reactive<VxeGridProps>({
     border: true,

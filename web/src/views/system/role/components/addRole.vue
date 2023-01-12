@@ -22,7 +22,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { addUser } from '@/api/sys/user'
+  import { addRole } from '@/api/sys/role'
   import { message } from 'ant-design-vue'
   const emits = defineEmits(['closeModal', 'refresh'])
   defineProps<{
@@ -30,11 +30,11 @@
     title: String
   }>()
   interface FormState {
-    username: string
+    name: string
     // ignoreKeepAlive: boolean
   }
   const formState = reactive<FormState>({
-    username: '1',
+    name: '1',
   })
 
   const formList = ref([
@@ -42,13 +42,13 @@
       type: 'input',
       label: '用户名',
       placeholder: '请输入用户名',
-      value: 'username',
+      value: 'name',
     },
   ])
   const handleOk = () => {
     console.log('ok')
     console.log(formState)
-    addUser(formState).then((res) => {
+    addRole(formState).then((res) => {
       console.log(res, 'res')
       if (res.id) {
         message.success('添加成功')

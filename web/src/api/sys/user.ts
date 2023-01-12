@@ -6,6 +6,8 @@ enum Api {
   Logout = '/logout',
   GetUserInfo = '/user/getUserInfo',
   GerUserList = '/user/list',
+  AddUser = '/user/add',
+
   TestRetry = '/testRetry',
 }
 
@@ -35,6 +37,16 @@ export function getUserList() {
 
 export function doLogout() {
   return defHttp.get({ url: Api.Logout })
+}
+
+/**
+ * @description: user login api
+ */
+export function addUser(params) {
+  return defHttp.post({
+    url: Api.AddUser,
+    params,
+  })
 }
 
 export function testRetry() {

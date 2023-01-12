@@ -70,18 +70,7 @@
     },
   ]
   // 树状图表的示例
-  const gridOptions = {
-    treeConfig: {
-      transform: true,
-      rowField: 'id',
-      parentField: 'pid',
-    },
-    seqConfig: {
-      seqMethod: ({ row, rowIndex }) => {
-        return row.pid === 0 ? rowIndex + 1 : ''
-      },
-    },
-  }
+  const gridOptions = {}
 
   const showForm = true
   // 搜索区域
