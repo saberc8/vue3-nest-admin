@@ -19,7 +19,7 @@ const iframe: AppRouteModule = {
       name: 'Doc',
       component: IFrame,
       meta: {
-        frameSrc: 'http://127.0.0.1:2023/docs',
+        frameSrc: 'https://saberc8.cn/nest/docs',
         title: '接口文档',
       },
     },
