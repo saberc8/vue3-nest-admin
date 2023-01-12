@@ -12,7 +12,10 @@ export const IS_DEV = getEnv() === 'dev'
 export const getConfig = () => {
   const environment = getEnv()
   console.log(environment, '当前运行的环境')
-  const yamlPath = path.join(process.cwd(), `./application.${environment}.yml`)
+  let yamlPath = path.join(process.cwd(), `./application.prod.yml`)
+  if (environment) {
+    yamlPath = path.join(process.cwd(), `./application.${environment}.yml`)
+  }
   const file = fs.readFileSync(yamlPath, 'utf8')
   const config = parse(file)
   return config

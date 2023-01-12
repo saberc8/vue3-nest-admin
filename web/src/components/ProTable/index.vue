@@ -7,6 +7,7 @@
       :dataSource="data"
       :gridOtherOptions="gridOptions"
       @reload-data="reloadData"
+      @page-change="pageChange"
     >
       <template #toolbar_buttons>
         <slot name="toolbar_buttons"></slot>
@@ -31,11 +32,12 @@
     searchForm: Array<any>
     showForm: Boolean
     getListFunc: Function
-    gridOptions: Object
     params: Object
+    gridOptions?: {}
   }>()
   const data = ref([])
   const proBody = ref()
+  let searchParams = {}
   const renderTable = (func: Function, params: Object) => {
     func(params).then((res) => {
       data.value = res.list
@@ -48,10 +50,24 @@
     console.log(proBody, 'proBody')
     renderTable(props.getListFunc, props.params)
   }
+  const pageChange = (e) => {
+    console.log(e, 'son-page-change')
+    // eslint-disable-next-line vue/no-mutating-props
+    // props.params.page = e.page
+    // // eslint-disable-next-line vue/no-mutating-props
+    // props.params.size = e.size
+    // const params = {
+    //   ...props.params,
+    //   ...searchParams,
+    // }
+    // renderTable(props.getListFunc, params)
+  }
+
   const searchData = (e) => {
+    searchParams = e
     const params = {
       ...props.params,
-      ...e,
+      ...searchParams,
     }
     renderTable(props.getListFunc, params)
   }

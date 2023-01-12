@@ -4,6 +4,7 @@
       <template #toolbar_buttons>
         <slot name="toolbar_title"></slot>
       </template>
+
       <template #toolbar_tools>
         <slot name="toolbar_buttons"></slot>
         <a-tooltip>
@@ -14,6 +15,25 @@
           />
         </a-tooltip>
       </template>
+
+      <template #pager>
+        <vxe-pager
+          :layouts="[
+            'Sizes',
+            'PrevJump',
+            'PrevPage',
+            'Number',
+            'NextPage',
+            'NextJump',
+            'FullJump',
+            'Total',
+          ]"
+          v-model:current-page="tablePage.page"
+          v-model:page-size="tablePage.size"
+          :total="tablePage.total"
+          @page-change="handlePageChange"
+        />
+      </template>
     </vxe-grid>
   </div>
 </template>
@@ -21,13 +41,13 @@
 <script lang="ts" setup>
   import { defineExpose } from 'vue'
   import { RedoOutlined } from '@ant-design/icons-vue'
-  import { VxeGridInstance, VxeGridProps } from 'vxe-table'
+  import { VxeGridInstance, VxeGridProps, VxePagerEvents } from 'vxe-table'
   const props = defineProps<{
     dataSource: Array<any>
     columns: Array<any>
-    gridOtherOptions: Object
+    gridOtherOptions?: Object
   }>()
-  const emit = defineEmits(['reloadData'])
+  const emit = defineEmits(['reloadData', 'pageChange'])
   const xGrid = ref<VxeGridInstance>()
   defineExpose({
     xGrid,
@@ -49,7 +69,17 @@
     data,
     ...props.gridOtherOptions,
   })
-
+  const tablePage = reactive({
+    total: 0,
+    page: 1,
+    size: 10,
+  })
+  const handlePageChange: VxePagerEvents.PageChange = ({ currentPage, pageSize }) => {
+    tablePage.page = currentPage
+    tablePage.size = pageSize
+    console.log('currentPage', tablePage)
+    emit('pageChange', tablePage)
+  }
   watch(
     () => props.dataSource,
     (val: any) => {

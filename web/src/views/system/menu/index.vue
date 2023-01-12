@@ -22,6 +22,7 @@
   <add-menu :visible="visible" :title="title" @close-modal="closeModal" @refresh="refreshTable" />
 </template>
 <script lang="ts" setup>
+  import dayjs from 'dayjs'
   import ProTable from '@/components/ProTable/index.vue'
   import { getMenuList } from '@/api/sys/menu'
   import { VxeGridPropTypes } from 'vxe-table'
@@ -67,6 +68,22 @@
           )
         },
       },
+    },
+    {
+      field: 'createdAt',
+      title: '创建时间',
+      showOverflow: true,
+      showHeaderOverflow: true,
+      width: 150,
+      formatter: (row: any) => dayjs(row.createdAt).format('YYYY-MM-DD HH:mm:ss'),
+    },
+    {
+      field: 'updatedAt',
+      title: '更新时间',
+      showOverflow: true,
+      showHeaderOverflow: true,
+      width: 150,
+      formatter: (row: any) => dayjs(row.updatedAt).format('YYYY-MM-DD HH:mm:ss'),
     },
   ]
   // 树状图表的示例

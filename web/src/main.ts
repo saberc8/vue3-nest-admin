@@ -31,7 +31,7 @@ import {
   Grid,
   // Tooltip,
   Toolbar,
-  // Pager,
+  Pager,
   // Form,
   // FormItem,
   // FormGather,
@@ -41,8 +41,8 @@ import {
   // RadioGroup,
   // RadioButton,
   // Switch,
-  // Input,
-  // Select,
+  Input,
+  Select,
   // Optgroup,
   // Option,
   // Textarea,
@@ -73,7 +73,7 @@ async function bootstrap() {
     .use(Grid)
     // .use(Tooltip)
     .use(Toolbar)
-    // .use(Pager)
+    .use(Pager)
     // .use(Form)
     // .use(FormItem)
     // .use(FormGather)
@@ -83,8 +83,8 @@ async function bootstrap() {
     // .use(RadioGroup)
     // .use(RadioButton)
     // .use(Switch)
-    // .use(Input)
-    // .use(Select)
+    .use(Input)
+    .use(Select)
     // .use(Optgroup)
     // .use(Option)
     // .use(Textarea)
