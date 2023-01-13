@@ -3,6 +3,7 @@ import { UserService } from './user.service'
 import { CreateUserDto } from './dto/create-user.dto'
 import { UserLoginDto } from './dto/user-login.dto'
 import { FindUserDto } from './dto/find-user.dto'
+import { FindUserRoleDto } from './dto/find-user-role.dto'
 import { UserEntity } from './entities/user.entity'
 import { ApiTags, ApiOperation, ApiBody, ApiExtraModels, ApiBearerAuth } from '@nestjs/swagger'
 
@@ -33,5 +34,10 @@ export class UserController {
   @Get('list')
   async getUserList(@Query() findUserDto: FindUserDto) {
     return await this.userService.findUserList(findUserDto)
+  }
+
+  @Get('findUserRole')
+  async findUserRole(@Query() data: FindUserRoleDto) {
+    return await this.userService.findUserRole(data)
   }
 }

@@ -4,8 +4,8 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 
 import { PermissionService } from './permission.service'
 import { PermissionController } from './permission.controller'
-import { UserRoleEntity } from './entities/user_role.entity'
-import { RoleMenuEntity } from './entities/role_menu.entity'
+import { UserRoleEntity } from '../user/entities/user_role.entity'
+import { RoleMenuEntity } from '../role/entities/role_menu.entity'
 
 import { JwtModule } from '@nestjs/jwt'
 import { ConfigModule, ConfigService } from '@nestjs/config'

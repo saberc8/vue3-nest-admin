@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { UserService } from './user.service'
 import { UserController } from './user.controller'
 import { UserEntity } from './entities/user.entity'
+import { UserRoleEntity } from './entities/user_role.entity'
 
 import { JwtModule } from '@nestjs/jwt'
 import { ConfigModule, ConfigService } from '@nestjs/config'
@@ -17,7 +18,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config'
         module: UserModule,
       },
     ]),
-    TypeOrmModule.forFeature([UserEntity]),
+    TypeOrmModule.forFeature([UserEntity, UserRoleEntity]),
     JwtModule.registerAsync({
       imports: [ConfigModule],
       useFactory: async (config: ConfigService) => ({

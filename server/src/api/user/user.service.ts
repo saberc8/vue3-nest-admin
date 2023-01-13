@@ -2,17 +2,24 @@ import { Injectable, HttpException } from '@nestjs/common'
 import { CreateUserDto } from './dto/create-user.dto'
 import { UserLoginDto } from './dto/user-login.dto'
 import { FindUserDto } from './dto/find-user.dto'
+import { FindUserRoleDto } from './dto/find-user-role.dto'
+
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
-import { UserEntity } from './entities/user.entity'
+
 import { genSalt, hash, compare } from 'bcryptjs'
 import { JwtService } from '@nestjs/jwt'
 import { ConfigService } from '@nestjs/config'
+
+import { UserEntity } from './entities/user.entity'
+import { UserRoleEntity } from './entities/user_role.entity'
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(UserEntity)
     private readonly userEntity: Repository<UserEntity>,
+    @InjectRepository(UserRoleEntity)
+    private readonly userRoleEntity: Repository<UserRoleEntity>,
     private readonly jwtService: JwtService,
     private readonly config: ConfigService,
   ) {}
@@ -84,6 +91,13 @@ export class UserService {
     })
     return Object.assign({ total: result[1] }, { list: result[0] })
   }
+
+  async findUserRole(data: FindUserRoleDto) {
+    const { userId } = data
+    const userRoles = await this.userRoleEntity.findOne({ where: { userId } })
+    return userRoles
+  }
+
   /**
    * 生成 token 与 刷新 token
    * @param payload
