@@ -4,6 +4,8 @@ import { getMenuListResultModel, GetMenuListModel, AddMenuModel } from './model/
 enum Api {
   GetMenuList = '/menu/list',
   AddMenu = '/menu/add',
+  DeleteMenu = '/menu/delete',
+  UpdateMenu = '/menu/update',
 }
 
 /**
@@ -16,4 +18,12 @@ export const getMenuList = (params: GetMenuListModel) => {
 
 export const addMenu = (params: AddMenuModel) => {
   return defHttp.post({ url: Api.AddMenu, params })
+}
+
+export const deleteMenu = (params) => {
+  return defHttp.delete({ url: Api.DeleteMenu, params })
+}
+
+export const updateMenu = (params) => {
+  return defHttp.post({ url: Api.UpdateMenu, params })
 }

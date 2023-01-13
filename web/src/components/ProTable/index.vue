@@ -6,6 +6,7 @@
       :columns="columns"
       :dataSource="data"
       :gridOtherOptions="gridOptions"
+      :tablePage="tablePage"
       @reload-data="reloadData"
       @page-change="pageChange"
     >
@@ -37,9 +38,20 @@
   const data = ref([])
   const proBody = ref()
   let searchParams = {}
+  interface TablePage {
+    page: number
+    size: number
+    total: number
+  }
+  let tablePage = reactive<TablePage>({
+    total: 0,
+    page: 1,
+    size: 10,
+  })
   const renderTable = (func: Function, params: Object) => {
     func(params).then((res) => {
       data.value = res.list
+      tablePage.total = res.total
     })
   }
   if (typeof props.getListFunc === 'function') {

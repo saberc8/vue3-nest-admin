@@ -28,9 +28,9 @@
             'FullJump',
             'Total',
           ]"
+          :total="tablePage.total"
           v-model:current-page="tablePage.page"
           v-model:page-size="tablePage.size"
-          :total="tablePage.total"
           @page-change="handlePageChange"
         />
       </template>
@@ -41,10 +41,12 @@
 <script lang="ts" setup>
   import { RedoOutlined } from '@ant-design/icons-vue'
   import { VxeGridInstance, VxeGridProps, VxePagerEvents } from 'vxe-table'
+  import { TablePage } from '../../types'
   const props = defineProps<{
     dataSource: Array<any>
     columns: Array<any>
     gridOtherOptions?: Object
+    tablePage: TablePage
   }>()
   const emit = defineEmits(['reloadData', 'pageChange'])
   const xGrid = ref<VxeGridInstance>()
@@ -52,6 +54,21 @@
     xGrid,
   })
   let data: any = []
+  let tablePage = reactive<TablePage>({
+    total: 0,
+    page: 1,
+    size: 10,
+  })
+  watch(
+    () => props.tablePage,
+    (val) => {
+      console.log(val)
+      tablePage.size = val.size
+      tablePage.page = val.page
+      tablePage.total = val.total
+    },
+    { immediate: true },
+  )
   const gridOptions = reactive<VxeGridProps>({
     border: true,
     align: null,
@@ -68,15 +85,11 @@
     data,
     ...props.gridOtherOptions,
   })
-  const tablePage = reactive({
-    total: 0,
-    page: 1,
-    size: 10,
-  })
   const handlePageChange: VxePagerEvents.PageChange = ({ currentPage, pageSize }) => {
-    tablePage.page = currentPage
-    tablePage.size = pageSize
-    console.log('currentPage', tablePage)
+    const tablePage = {
+      page: currentPage,
+      size: pageSize,
+    }
     emit('pageChange', tablePage)
   }
   watch(
@@ -93,6 +106,7 @@
     (val) => {
       gridOptions.columns = val
     },
+    { immediate: true },
   )
 
   const reloadData = () => {

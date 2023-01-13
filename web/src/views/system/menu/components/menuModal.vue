@@ -22,37 +22,48 @@
 </template>
 
 <script lang="ts" setup>
-  import { addMenu } from '@/api/sys/menu'
+  import { addMenu, updateMenu } from '@/api/sys/menu'
   import { message } from 'ant-design-vue'
+  import { FormState } from '../type'
   const emits = defineEmits(['closeModal', 'refresh'])
-  defineProps<{
+  const props = defineProps<{
     visible: Boolean
     title: String
+    formData: FormState | undefined
   }>()
-  interface FormState {
-    name: string
-    title: string
-    path: string
-    icon: string
-    component: string
-    redirect: string
-    pid: number
-    orderNo: number
-    frameSrc: string
-    // ignoreKeepAlive: boolean
-  }
-  const formState = reactive<FormState>({
+  let formState = reactive<FormState>({
+    id: null,
     name: '1',
-    title: '2',
-    path: '3',
-    icon: '4',
-    component: '5',
-    redirect: '6',
+    title: '1',
+    path: '1',
+    icon: '1',
+    component: '1',
+    redirect: '1',
     pid: 0,
     orderNo: 0,
-    frameSrc: '7',
+    frameSrc: '1',
     // ignoreKeepAlive: false,
   })
+  console.log(props.formData, 'props.formData')
+  watch(
+    () => props.formData,
+    (val) => {
+      if (val) {
+        const t = JSON.parse(JSON.stringify(val))
+        formState.id = t.id
+        formState.name = t.name
+        formState.title = t.title
+        formState.path = t.path
+        formState.icon = t.icon
+        formState.component = t.component
+        formState.redirect = t.redirect
+        formState.pid = t.pid
+        formState.orderNo = t.orderNo
+        formState.frameSrc = t.frameSrc
+      }
+    },
+    { immediate: true },
+  )
 
   const formList = ref([
     {
@@ -117,8 +128,37 @@
     // },
   ])
   const handleOk = () => {
-    console.log('ok')
+    console.log('ok', props.title)
     console.log(formState)
+    if (props.title === '编辑菜单') {
+      const params = {
+        id: Number(formState.id),
+        name: formState.name,
+        title: formState.title,
+        path: formState.path,
+        icon: formState.icon,
+        component: formState.component,
+        redirect: formState.redirect,
+        pid: formState.pid,
+        orderNo: formState.orderNo,
+        frameSrc: formState.frameSrc,
+        // ignoreKeepAlive: formState.ignoreKeepAlive,
+      }
+      updateMenuFunc(params)
+    } else {
+      addMenuFunc()
+    }
+  }
+
+  const updateMenuFunc = (params) => {
+    updateMenu(params).then((res) => {
+      console.log(res)
+      message.success('修改成功')
+      emits('refresh', false)
+    })
+  }
+
+  const addMenuFunc = () => {
     addMenu(formState).then((res) => {
       console.log(res, 'res')
       if (res.id) {

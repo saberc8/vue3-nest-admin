@@ -1,7 +1,5 @@
-export class FindMenuDto {
-  id: number
-  page: number
-  size: number
+export interface FormState {
+  id?: number | string | null
   name: string
   title: string
   path: string
@@ -11,5 +9,5 @@ export class FindMenuDto {
   pid: number
   orderNo: number
   frameSrc: string
-  ignoreKeepAlive: boolean
+  // ignoreKeepAlive: boolean
 }

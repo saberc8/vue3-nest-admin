@@ -19,21 +19,30 @@
       </a-button>
     </template>
   </ProTable>
-  <add-menu :visible="visible" :title="title" @close-modal="closeModal" @refresh="refreshTable" />
+  <add-menu
+    :visible="visible"
+    :title="title"
+    :formData="formData"
+    @close-modal="closeModal"
+    @refresh="refreshTable"
+  />
 </template>
 <script lang="ts" setup>
   import dayjs from 'dayjs'
   import ProTable from '@/components/ProTable/index.vue'
-  import { getMenuList } from '@/api/sys/menu'
+  import { getMenuList, deleteMenu } from '@/api/sys/menu'
   import { VxeGridPropTypes } from 'vxe-table'
-  import { createVNode } from 'vue'
+  import { createVNode, VNode } from 'vue'
   import { PlusOutlined } from '@ant-design/icons-vue'
-  import addMenu from './components/addMenu.vue'
+  import addMenu from './components/menuModal.vue'
+  import { message, Modal } from 'ant-design-vue'
+  import { FormState } from './type'
   const proTable = ref()
-  console.log(proTable.value, 'proTable')
   const visible = ref<Boolean>(false)
-  const title = '新增菜单'
+  const title = ref('新增菜单')
+
   const getListFunc = getMenuList
+  const formData = ref<FormState>()
   const columns: VxeGridPropTypes.Columns = [
     {
       type: 'seq',
@@ -42,14 +51,26 @@
     },
     { field: 'id', title: 'ID', width: 80 },
     { field: 'pid', title: 'PID', width: 80 },
-    { field: 'title', title: '标题' },
-    { field: 'name', title: '名称' },
-    { field: 'path', title: '路由' },
-    { field: 'component', title: '组件' },
-    { field: 'redirect', title: '父级定向' },
-    { field: 'orderNo', title: '排序' },
-    { field: 'icon', title: '图标' },
-    { field: 'frameSrc', title: '内嵌iframe' },
+    { field: 'title', title: '标题', showOverflow: true, showHeaderOverflow: true, width: 150 },
+    { field: 'name', title: '名称', showOverflow: true, showHeaderOverflow: true, width: 150 },
+    { field: 'path', title: '路由', showOverflow: true, showHeaderOverflow: true, width: 150 },
+    { field: 'component', title: '组件', showOverflow: true, showHeaderOverflow: true, width: 150 },
+    {
+      field: 'redirect',
+      title: '父级定向',
+      showOverflow: true,
+      showHeaderOverflow: true,
+      width: 150,
+    },
+    { field: 'orderNo', title: '排序', showOverflow: true, showHeaderOverflow: true, width: 150 },
+    { field: 'icon', title: '图标', showOverflow: true, showHeaderOverflow: true, width: 150 },
+    {
+      field: 'frameSrc',
+      title: '内嵌iframe',
+      showOverflow: true,
+      showHeaderOverflow: true,
+      width: 150,
+    },
     {
       field: 'ignoreKeepAlive',
       title: '是否缓存',
@@ -84,6 +105,54 @@
       showHeaderOverflow: true,
       width: 150,
       formatter: (row: any) => dayjs(row.updatedAt).format('YYYY-MM-DD HH:mm:ss'),
+    },
+    {
+      title: '操作',
+      width: 200,
+      align: 'center',
+      slots: {
+        default: ({ row }): VNode => {
+          return createVNode(
+            resolveComponent('a-space'),
+            {
+              size: 'middle',
+            },
+            {
+              default: (): VNode[] => [
+                createVNode(
+                  resolveComponent('a-button'),
+                  {
+                    type: 'primary',
+                    size: 'small',
+                    onClick: () => {
+                      editMenuData(row)
+                    },
+                  },
+                  () => '编辑',
+                ),
+                createVNode(
+                  resolveComponent('a-button'),
+                  {
+                    type: 'danger',
+                    size: 'small',
+                    onClick: () => {
+                      Modal.confirm({
+                        title: '提示',
+                        content: '确定删除该菜单吗？',
+                        onOk: () => {
+                          deleteMenuFunc(row.id)
+                        },
+                      })
+                    },
+                  },
+                  () => '删除',
+                ),
+              ],
+            },
+          )
+        },
+      },
+      fixed: 'right',
     },
   ]
   // 树状图表的示例
@@ -149,18 +218,26 @@
     page: 1,
     size: 50,
   })
+
   let dataSource = ref<any>([])
-  const renderMenuList = async (params) => {
-    const res = await getMenuList(params)
-    console.log(res, '--')
-    dataSource.value = res.list
-    console.log(dataSource.value, 'dataSource----')
-  }
-  // renderMenuList(params)
 
   const addMenuData = () => {
-    console.log('addMenuData')
+    title.value = '新增菜单'
     visible.value = true
+  }
+
+  const editMenuData = (row: any) => {
+    visible.value = true
+    title.value = '编辑菜单'
+    formData.value = row
+  }
+
+  const deleteMenuFunc = (id: number) => {
+    deleteMenu({ id }).then((res) => {
+      console.log(res, 'res')
+      message.success('删除成功')
+      proTable.value.reloadData()
+    })
   }
 
   const closeModal = () => {
@@ -168,7 +245,7 @@
   }
 
   const refreshTable = () => {
-    renderMenuList(params)
     closeModal()
+    proTable.value.reloadData()
   }
 </script>
