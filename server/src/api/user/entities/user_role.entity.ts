@@ -1,7 +1,7 @@
 import { SharedEntity } from '@src/shared/entities/base.entity'
 import { Entity, Column, Index } from 'typeorm'
 import { ApiProperty } from '@nestjs/swagger'
-@Entity('user-role')
+@Entity('user_role')
 export class UserRoleEntity extends SharedEntity {
   constructor() {
     super()

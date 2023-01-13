@@ -94,7 +94,10 @@ export class UserService {
 
   async findUserRole(data: FindUserRoleDto) {
     const { userId } = data
-    const userRoles = await this.userRoleEntity.findOne({ where: { userId } })
+    const userRoles = await this.userRoleEntity.find({
+      relations: ['roleId'],
+      where: { id: userId },
+    })
     return userRoles
   }
 

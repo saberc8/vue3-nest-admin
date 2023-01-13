@@ -1,7 +1,7 @@
 import { SharedEntity } from '@src/shared/entities/base.entity'
 import { Entity, Column, Index } from 'typeorm'
 import { ApiProperty } from '@nestjs/swagger'
-@Entity('role-menu')
+@Entity('role_menu')
 export class RoleMenuEntity extends SharedEntity {
   constructor() {
     super()
