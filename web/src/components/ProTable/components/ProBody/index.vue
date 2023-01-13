@@ -39,7 +39,6 @@
 </template>
 
 <script lang="ts" setup>
-  import { defineExpose } from 'vue'
   import { RedoOutlined } from '@ant-design/icons-vue'
   import { VxeGridInstance, VxeGridProps, VxePagerEvents } from 'vxe-table'
   const props = defineProps<{

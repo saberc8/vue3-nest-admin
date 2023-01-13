@@ -20,7 +20,6 @@
 </template>
 
 <script lang="ts" setup>
-  import { defineExpose } from 'vue'
   import ProForm from './components/ProForm/index.vue'
   import ProBody from './components/ProBody/index.vue'
   const props = defineProps<{
