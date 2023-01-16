@@ -11,6 +11,7 @@ import { TransformInterceptor } from './interceptors/transform.interceptor'
 import { getConfig } from './utils'
 import { SharedModule } from './shared/shared.module'
 import { APP_FILTER, APP_INTERCEPTOR, APP_PIPE, APP_GUARD } from '@nestjs/core'
+
 @Module({
   imports: [
     ConfigModule.forRoot({

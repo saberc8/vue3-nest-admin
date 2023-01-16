@@ -5,23 +5,28 @@ import { FindUserDto } from './dto/find-user.dto'
 import { FindUserRoleDto } from './dto/find-user-role.dto'
 
 import { InjectRepository } from '@nestjs/typeorm'
-import { Repository } from 'typeorm'
+import { Repository, DataSource } from 'typeorm'
 
 import { genSalt, hash, compare } from 'bcryptjs'
 import { JwtService } from '@nestjs/jwt'
 import { ConfigService } from '@nestjs/config'
 
 import { UserEntity } from './entities/user.entity'
-import { UserRoleEntity } from './entities/user_role.entity'
+import { RoleEntity } from '@src/api/role/entities/role.entity'
+// import { UserRoleEntity } from './entities/user_role.entity'
+
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(UserEntity)
     private readonly userEntity: Repository<UserEntity>,
-    @InjectRepository(UserRoleEntity)
-    private readonly userRoleEntity: Repository<UserRoleEntity>,
+    @InjectRepository(RoleEntity)
+    private readonly roleEntity: Repository<RoleEntity>,
+    // @InjectRepository(UserRoleEntity)
+    // private readonly userRoleEntity: Repository<UserRoleEntity>,
     private readonly jwtService: JwtService,
     private readonly config: ConfigService,
+    private dataSource: DataSource,
   ) {}
 
   /**
@@ -86,19 +91,50 @@ export class UserService {
       order: {
         id: 'ASC',
       },
+      relations: ['roleId'],
       skip: (page - 1) * size,
       take: size,
     })
+    // 写法二：使用 queryBuilder
+    // const result = await this.dataSource
+    //   .createQueryBuilder(UserEntity, 'user')
+    //   .leftJoinAndSelect('user.role', 'role')
+    //   .where(where)
+    //   .orderBy('user.id', 'ASC')
+    //   .skip((page - 1) * size)
+    //   .take(size)
+    //   .getManyAndCount()
     return Object.assign({ total: result[1] }, { list: result[0] })
   }
 
+  // 保存用户角色
+  async saveUserRole(data: FindUserRoleDto) {
+    const { userId, roleId } = data
+    const user = await this.userEntity.findOne({ where: { id: userId } })
+    if (!user) {
+      throw new HttpException('用户不存在', 201)
+    }
+    const role = await this.roleEntity.findOne({ where: { id: roleId } })
+    if (!role) {
+      throw new HttpException('角色不存在', 201)
+    }
+    user.roleId = role
+    await this.userEntity.save(user)
+  }
+
   async findUserRole(data: FindUserRoleDto) {
+    console.log(data, 'FindUserRoleDto')
     const { userId } = data
-    const userRoles = await this.userRoleEntity.find({
-      relations: ['roleId'],
-      where: { id: userId },
-    })
-    return userRoles
+    console.log(userId, 'userId')
+    // const res = await this.userEntity.findAndCount()
+
+    const res = await this.dataSource
+      .createQueryBuilder(UserEntity, 'user')
+      .leftJoinAndSelect('user.roles', 'roles')
+      .where('user.id = :id', { id: userId })
+      .getOne()
+    console.log(res)
+    return res
   }
 
   /**

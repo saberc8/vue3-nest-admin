@@ -31,6 +31,7 @@ export class RoleService {
       order: {
         id: 'ASC',
       },
+      relations: ['menu'],
       skip: (page - 1) * size,
       take: size,
     })

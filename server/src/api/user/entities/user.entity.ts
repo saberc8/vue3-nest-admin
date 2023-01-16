@@ -1,7 +1,8 @@
 import { SharedEntity } from '@src/shared/entities/base.entity'
-import { Entity, Column, Index } from 'typeorm'
+import { Entity, Column, Index, OneToOne, JoinColumn } from 'typeorm'
 import { Expose, Exclude } from 'class-transformer'
 import { ApiProperty } from '@nestjs/swagger'
+import { RoleEntity } from '@src/api/role/entities/role.entity'
 @Entity('user')
 export class UserEntity extends SharedEntity {
   constructor() {
@@ -70,4 +71,8 @@ export class UserEntity extends SharedEntity {
   isSuperStr(): string {
     return this.isSuper === 1 ? '超级管理员' : '普通用户'
   }
+
+  @OneToOne(() => RoleEntity)
+  @JoinColumn()
+  roleId: RoleEntity
 }

@@ -40,4 +40,10 @@ export class UserController {
   async findUserRole(@Query() data: FindUserRoleDto) {
     return await this.userService.findUserRole(data)
   }
+
+  @Post('saveUserRole')
+  async saveUserRole(@Body() data: FindUserRoleDto) {
+    console.log(data)
+    return await this.userService.saveUserRole(data)
+  }
 }

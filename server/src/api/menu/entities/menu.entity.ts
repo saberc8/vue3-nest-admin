@@ -1,5 +1,7 @@
 import { SharedEntity } from '@src/shared/entities/base.entity'
-import { Entity, Column, Index } from 'typeorm'
+import { RoleEntity } from '@src/api/role/entities/role.entity'
+
+import { Entity, Column, Index, ManyToOne } from 'typeorm'
 
 @Entity('menu')
 export class MenuEntity extends SharedEntity {
@@ -95,4 +97,7 @@ export class MenuEntity extends SharedEntity {
     comment: '是否缓存',
   })
   ignoreKeepAlive!: boolean
+
+  @ManyToOne(() => RoleEntity, (roleEntity) => roleEntity.menu)
+  role: RoleEntity
 }
