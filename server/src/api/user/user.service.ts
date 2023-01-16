@@ -93,7 +93,9 @@ export class UserService {
         id: 'ASC',
       },
       // 多对多
-      relations: ['role'],
+      relations: {
+        roles: true,
+      },
       skip: (page - 1) * size,
       take: size,
     })
@@ -112,16 +114,11 @@ export class UserService {
 
   // 保存用户角色
   async saveUserRole(data: FindUserRoleDto) {
-    const { userId, roleId } = data
+    const { userId } = data
     const user = await this.userEntity.findOne({ where: { id: userId } })
     if (!user) {
       throw new HttpException('用户不存在', 201)
     }
-    const role = await this.roleEntity.find({ where: { id: roleId } })
-    if (!role) {
-      throw new HttpException('角色不存在', 201)
-    }
-    user.role = role
     await this.userEntity.save(user)
   }
 

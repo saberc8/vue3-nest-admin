@@ -1,5 +1,5 @@
 import { SharedEntity } from '@src/shared/entities/base.entity'
-import { Entity, Column, Index, OneToMany, ManyToOne } from 'typeorm'
+import { Entity, Column, Index, OneToMany, ManyToMany, JoinTable } from 'typeorm'
 import { MenuEntity } from '@src/api/menu/entities/menu.entity'
 import { UserEntity } from '@src/api/user/entities/user.entity'
 
@@ -29,7 +29,4 @@ export class RoleEntity extends SharedEntity {
 
   @OneToMany(() => MenuEntity, (menuEntity) => menuEntity.role)
   menu: MenuEntity[]
-
-  @ManyToOne(() => UserEntity, (userEntity) => userEntity.role)
-  user: UserEntity
 }

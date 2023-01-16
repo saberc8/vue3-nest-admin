@@ -1,5 +1,5 @@
 import { SharedEntity } from '@src/shared/entities/base.entity'
-import { Entity, Column, Index, OneToMany } from 'typeorm'
+import { Entity, Column, Index, ManyToMany, JoinTable } from 'typeorm'
 import { Expose, Exclude } from 'class-transformer'
 import { ApiProperty } from '@nestjs/swagger'
 import { RoleEntity } from '@src/api/role/entities/role.entity'
@@ -72,6 +72,7 @@ export class UserEntity extends SharedEntity {
     return this.isSuper === 1 ? '超级管理员' : '普通用户'
   }
 
-  @OneToMany(() => RoleEntity, (roleEntity) => roleEntity.user)
-  role: RoleEntity[]
+  @ManyToMany(() => RoleEntity)
+  @JoinTable()
+  roles: RoleEntity[]
 }
