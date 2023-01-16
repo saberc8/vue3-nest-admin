@@ -117,11 +117,11 @@ export class UserService {
     if (!user) {
       throw new HttpException('用户不存在', 201)
     }
-    // const role = await this.roleEntity.findOne({ where: { id: roleId } })
-    // if (!role) {
-    //   throw new HttpException('角色不存在', 201)
-    // }
-    // user.role = role
+    const role = await this.roleEntity.find({ where: { id: roleId } })
+    if (!role) {
+      throw new HttpException('角色不存在', 201)
+    }
+    user.role = role
     await this.userEntity.save(user)
   }
 
