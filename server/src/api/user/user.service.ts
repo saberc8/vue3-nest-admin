@@ -81,9 +81,10 @@ export class UserService {
   }
 
   async findUserList(findUserDto: FindUserDto) {
-    const { page = 1, size = 10, username } = findUserDto
+    const { page = 1, size = 10, username, id } = findUserDto
     // where 模糊搜索
     const where = {
+      ...(!!id ? { id } : null),
       ...(!!username ? { username } : null),
     }
     const result = await this.userEntity.findAndCount({
@@ -91,10 +92,12 @@ export class UserService {
       order: {
         id: 'ASC',
       },
-      relations: ['roleId'],
+      // 多对多
+      relations: ['role'],
       skip: (page - 1) * size,
       take: size,
     })
+
     // 写法二：使用 queryBuilder
     // const result = await this.dataSource
     //   .createQueryBuilder(UserEntity, 'user')
@@ -114,11 +117,11 @@ export class UserService {
     if (!user) {
       throw new HttpException('用户不存在', 201)
     }
-    const role = await this.roleEntity.findOne({ where: { id: roleId } })
-    if (!role) {
-      throw new HttpException('角色不存在', 201)
-    }
-    user.roleId = role
+    // const role = await this.roleEntity.findOne({ where: { id: roleId } })
+    // if (!role) {
+    //   throw new HttpException('角色不存在', 201)
+    // }
+    // user.role = role
     await this.userEntity.save(user)
   }
 
@@ -130,7 +133,7 @@ export class UserService {
 
     const res = await this.dataSource
       .createQueryBuilder(UserEntity, 'user')
-      .leftJoinAndSelect('user.roles', 'roles')
+      .leftJoinAndSelect('user.role', 'role')
       .where('user.id = :id', { id: userId })
       .getOne()
     console.log(res)

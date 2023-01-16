@@ -20,9 +20,11 @@ export class RoleService {
   }
 
   async getRoleList(findRoleDto: FindRoleDto) {
-    const { page = 1, size = 10, name, remark } = findRoleDto
+    const { page = 1, size = 10, name, remark, id } = findRoleDto
+    console.log(findRoleDto)
     // where 模糊搜索
     const where = {
+      ...(!!id ? { id } : null),
       ...(!!name ? { name: Like(`%${name}%`) } : null),
       ...(!!remark ? { remark: Like(`%${remark}%`) } : null),
     }
