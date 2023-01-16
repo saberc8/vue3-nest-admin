@@ -2,13 +2,14 @@ import { Injectable } from '@nestjs/common'
 import { CreateRoleDto } from './dto/create-role.dto'
 import { FindRoleDto } from './dto/find-role.dto'
 import { InjectRepository } from '@nestjs/typeorm'
-import { Repository, Like } from 'typeorm'
+import { Repository, Like, DataSource } from 'typeorm'
 import { RoleEntity } from './entities/role.entity'
 @Injectable()
 export class RoleService {
   constructor(
     @InjectRepository(RoleEntity)
     private readonly roleEntity: Repository<RoleEntity>,
+    private dataSource: DataSource,
   ) {}
 
   async add(createRoleDto: CreateRoleDto) {
@@ -33,10 +34,21 @@ export class RoleService {
       order: {
         id: 'ASC',
       },
-      relations: ['roleToMenu'],
+      relations: {
+        menus: true,
+      },
       skip: (page - 1) * size,
       take: size,
     })
+    // 写法二：使用 queryBuilder
+    // const result = await this.dataSource
+    //   .createQueryBuilder(RoleEntity, 'role')
+    //   .leftJoinAndSelect('role.menu', 'menu')
+    //   .where(where)
+    //   .orderBy('menu.id', 'ASC')
+    //   .skip((page - 1) * size)
+    //   .take(size)
+    //   .getManyAndCount()
     return Object.assign({ total: result[1] }, { list: result[0] })
   }
 }

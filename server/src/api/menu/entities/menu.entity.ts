@@ -98,6 +98,6 @@ export class MenuEntity extends SharedEntity {
   })
   ignoreKeepAlive!: boolean
 
-  @OneToMany(() => RoleMenuEntity, (roleMenuEntity) => roleMenuEntity.menu)
-  roleToMenu!: RoleMenuEntity[]
+  // @OneToMany(() => RoleMenuEntity, (roleMenuEntity) => roleMenuEntity.menu)
+  // role!: RoleMenuEntity[]
 }
