@@ -1,8 +1,6 @@
 import { SharedEntity } from '@src/shared/entities/base.entity'
-import { Entity, Column, Index, OneToMany, ManyToMany, JoinTable } from 'typeorm'
-import { MenuEntity } from '@src/api/menu/entities/menu.entity'
-import { UserEntity } from '@src/api/user/entities/user.entity'
-
+import { Entity, Column, Index, OneToMany } from 'typeorm'
+import { RoleMenuEntity } from '@src/api/role/entities/role-menu.entity'
 @Entity('role')
 export class RoleEntity extends SharedEntity {
   constructor() {
@@ -27,6 +25,6 @@ export class RoleEntity extends SharedEntity {
   })
   remark!: string
 
-  @OneToMany(() => MenuEntity, (menuEntity) => menuEntity.role)
-  menu: MenuEntity[]
+  @OneToMany(() => RoleMenuEntity, (roleMenuEntity) => roleMenuEntity.role)
+  roleToMenu!: RoleMenuEntity[]
 }

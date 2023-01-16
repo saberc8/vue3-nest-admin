@@ -33,7 +33,7 @@ export class RoleService {
       order: {
         id: 'ASC',
       },
-      relations: ['menu'],
+      relations: ['roleToMenu'],
       skip: (page - 1) * size,
       take: size,
     })

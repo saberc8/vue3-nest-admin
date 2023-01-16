@@ -1,7 +1,7 @@
 import { SharedEntity } from '@src/shared/entities/base.entity'
-import { RoleEntity } from '@src/api/role/entities/role.entity'
+import { RoleMenuEntity } from '@src/api/role/entities/role-menu.entity'
 
-import { Entity, Column, Index, ManyToOne } from 'typeorm'
+import { Entity, Column, Index, OneToMany } from 'typeorm'
 
 @Entity('menu')
 export class MenuEntity extends SharedEntity {
@@ -98,6 +98,6 @@ export class MenuEntity extends SharedEntity {
   })
   ignoreKeepAlive!: boolean
 
-  @ManyToOne(() => RoleEntity, (roleEntity) => roleEntity.menu)
-  role: RoleEntity
+  @OneToMany(() => RoleMenuEntity, (roleMenuEntity) => roleMenuEntity.menu)
+  roleToMenu!: RoleMenuEntity[]
 }
