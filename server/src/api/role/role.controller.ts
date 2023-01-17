@@ -15,4 +15,9 @@ export class RoleController {
   getRoleList(@Query() findRoleDto: FindRoleDto) {
     return this.roleService.getRoleList(findRoleDto)
   }
+
+  @Get('menu_list')
+  getRoleMenuList(@Query() data: FindRoleDto) {
+    return this.roleService.getRoleMenuList(data)
+  }
 }

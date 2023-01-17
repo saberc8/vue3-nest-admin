@@ -51,4 +51,52 @@ export class RoleService {
     //   .getManyAndCount()
     return Object.assign({ total: result[1] }, { list: result[0] })
   }
+
+  async getRoleMenuList(data: FindRoleDto) {
+    const { id } = data
+    console.log(data)
+    // where 模糊搜索
+    const where = {
+      ...(!!id ? { id } : null),
+    }
+    const result = await this.roleEntity.find({
+      where,
+      order: {
+        id: 'ASC',
+      },
+      relations: {
+        menus: true,
+      },
+    })
+    console.log(result)
+    // 递归pid ID
+    const getPid = (data, pid) => {
+      const arr = []
+      data.forEach((item) => {
+        console.log(item)
+        const obj = {
+          id: Number(item.id),
+          name: item.name,
+          pid: item.pid,
+          path: item.path,
+          component: item.component,
+        }
+        obj['meta'] = {
+          title: item.title,
+          icon: item.icon,
+          hideMenu: item.hideMenu,
+          hideBreadcrumb: item.hideBreadcrumb,
+          orderNo: item.orderNo,
+        }
+        if (obj.pid === pid) {
+          arr.push(obj)
+          obj['children'] = getPid(data, obj.id)
+        }
+      })
+      return arr
+    }
+
+    const menuList = getPid(result[0].menus, 0)
+    return menuList
+  }
 }

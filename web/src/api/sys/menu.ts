@@ -3,6 +3,7 @@ import { getMenuListResultModel, GetMenuListModel, AddMenuModel } from './model/
 
 enum Api {
   GetMenuList = '/menu/list',
+  GetRoleMenuList = '/role/menu_list',
   AddMenu = '/menu/add',
   DeleteMenu = '/menu/delete',
   UpdateMenu = '/menu/update',
@@ -14,6 +15,10 @@ enum Api {
 
 export const getMenuList = (params: GetMenuListModel) => {
   return defHttp.get<getMenuListResultModel>({ url: Api.GetMenuList, params })
+}
+
+export const getRoleMenuList = (id: number) => {
+  return defHttp.get<getMenuListResultModel>({ url: Api.GetRoleMenuList, params: { id } })
 }
 
 export const addMenu = (params: AddMenuModel) => {

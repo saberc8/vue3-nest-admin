@@ -18,7 +18,7 @@ import { PAGE_NOT_FOUND_ROUTE } from '@/router/routes/basic'
 
 import { filter } from '@/utils/helper/treeHelper'
 
-import { getMenuList } from '@/api/sys/menu'
+import { getRoleMenuList } from '@/api/sys/menu'
 
 import { useMessage } from '@/hooks/web/useMessage'
 import { PageEnum } from '@/enums/pageEnum'
@@ -104,7 +104,6 @@ export const usePermissionStore = defineStore({
     async buildRoutesAction(): Promise<AppRouteRecordRaw[]> {
       const userStore = useUserStore()
       const appStore = useAppStoreWithOut()
-
       let routes: AppRouteRecordRaw[] = []
       const roleList = toRaw(userStore.getRoleList) || []
       const { permissionMode = projectSetting.permissionMode } = appStore.getProjectConfig
@@ -175,7 +174,6 @@ export const usePermissionStore = defineStore({
           menuList.sort((a, b) => {
             return (a.meta?.orderNo || 0) - (b.meta?.orderNo || 0)
           })
-
           // 设置菜单列表
           this.setFrontMenuList(menuList)
 
@@ -196,7 +194,9 @@ export const usePermissionStore = defineStore({
           // 这个功能可能只需要执行一次，实际项目可以自己放在合适的时间
           let routeList: AppRouteRecordRaw[] = []
           try {
-            routeList = (await getMenuList()) as AppRouteRecordRaw[]
+            const userId = userStore.getUserId
+            routeList = (await getRoleMenuList(userId)) as AppRouteRecordRaw[]
+            console.log(routeList, '--getRoleMenuList--')
           } catch (error) {
             console.error(error)
           }
