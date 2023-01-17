@@ -8,10 +8,12 @@ specifiers:
   '@nestjs/jwt': ^10.0.1
   '@nestjs/mapped-types': '*'
   '@nestjs/platform-express': ^9.2.1
+  '@nestjs/schedule': ^2.1.0
   '@nestjs/schematics': ^9.0.4
   '@nestjs/swagger': ^6.1.4
   '@nestjs/testing': ^9.2.1
   '@nestjs/typeorm': ^9.0.1
+  '@types/cron': ^2.0.0
   '@types/express': ^4.17.15
   '@types/jest': 29.2.5
   '@types/node': ^18.11.18
@@ -52,6 +54,7 @@ dependencies:
   '@nestjs/jwt': registry.npmmirror.com/@nestjs/jwt/10.0.1_@nestjs+common@9.2.1
   '@nestjs/mapped-types': registry.npmmirror.com/@nestjs/mapped-types/1.2.0_uooigj5zjqahwxoh46ti3f33my
   '@nestjs/platform-express': registry.npmmirror.com/@nestjs/platform-express/9.2.1_hjcqpoaebdr7gdo5hgc22hthbe
+  '@nestjs/schedule': registry.npmmirror.com/@nestjs/schedule/2.1.0_dntc3uqqknzoduyjojusds5kla
   '@nestjs/swagger': registry.npmmirror.com/@nestjs/swagger/6.1.4_zvabycmw733xee3ikaxv4c7mny
   '@nestjs/typeorm': registry.npmmirror.com/@nestjs/typeorm/9.0.1_hkapd3a3mi37wyf4vtt5y4i2ye
   bcryptjs: registry.npmmirror.com/bcryptjs/2.4.3
@@ -73,6 +76,7 @@ devDependencies:
   '@nestjs/cli': registry.npmmirror.com/@nestjs/cli/9.1.8
   '@nestjs/schematics': registry.npmmirror.com/@nestjs/schematics/9.0.4_typescript@4.9.4
   '@nestjs/testing': registry.npmmirror.com/@nestjs/testing/9.2.1_wdbvfsxfdwzlwdfiyh2gynjl4m
+  '@types/cron': registry.npmmirror.com/@types/cron/2.0.0
   '@types/express': registry.npmmirror.com/@types/express/4.17.15
   '@types/jest': registry.npmmirror.com/@types/jest/29.2.5
   '@types/node': registry.npmmirror.com/@types/node/18.11.18
@@ -1168,6 +1172,23 @@ packages:
     transitivePeerDependencies:
       - supports-color
 
+  registry.npmmirror.com/@nestjs/schedule/2.1.0_dntc3uqqknzoduyjojusds5kla:
+    resolution: {integrity: sha512-4Xaw56WiW3VsxEPPnj/iDtfjcO+sUZyYAeRxD0gnF5havncxjAnv52Iw7UH3DuzzUA784xPGgGje3Fq0Gu925g==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@nestjs/schedule/-/schedule-2.1.0.tgz}
+    id: registry.npmmirror.com/@nestjs/schedule/2.1.0
+    name: '@nestjs/schedule'
+    version: 2.1.0
+    peerDependencies:
+      '@nestjs/common': ^7.0.0 || ^8.0.0 || ^9.0.0
+      '@nestjs/core': ^7.0.0 || ^8.0.0 || ^9.0.0
+      reflect-metadata: ^0.1.12
+    dependencies:
+      '@nestjs/common': registry.npmmirror.com/@nestjs/common/9.2.1_ufuujcqbszwis444rmt5m3dshy
+      '@nestjs/core': registry.npmmirror.com/@nestjs/core/9.2.1_e6la6qvsclaae2becwjnmfvsuq
+      cron: registry.npmmirror.com/cron/2.0.0
+      reflect-metadata: registry.npmmirror.com/reflect-metadata/0.1.13
+      uuid: registry.npmmirror.com/uuid/8.3.2
+    dev: false
+
   registry.npmmirror.com/@nestjs/schematics/9.0.4_bpd7edbl7imd2lxcmdt57tn7ne:
     resolution: {integrity: sha512-egurCfAc4e5i1r2TmeAF0UrOKejFmT5oTdv4b7HcOVPupc3QGU7CbEfGleL3mkM5AjrixTQeMxU9bJ00ttAbGg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@nestjs/schematics/-/schematics-9.0.4.tgz}
     id: registry.npmmirror.com/@nestjs/schematics/9.0.4
@@ -1426,6 +1447,15 @@ packages:
     version: 2.1.2
     dev: true
 
+  registry.npmmirror.com/@types/cron/2.0.0:
+    resolution: {integrity: sha512-xZM08fqvwIXgghtPVkSPKNgC+JoMQ2OHazEvyTKnNf7aWu1aB6/4lBbQFrb03Td2cUGG7ITzMv3mFYnMu6xRaQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/cron/-/cron-2.0.0.tgz}
+    name: '@types/cron'
+    version: 2.0.0
+    dependencies:
+      '@types/luxon': registry.npmmirror.com/@types/luxon/3.2.0
+      '@types/node': registry.npmmirror.com/@types/node/18.11.18
+    dev: true
+
   registry.npmmirror.com/@types/eslint-scope/3.7.4:
     resolution: {integrity: sha512-9K4zoImiZc3HlIp6AVUDE4CWYx22a+lhSZMYNpbjW04+YF0KWj4pJXnEMjdnFTiQibFFmElcsasJXDbdI/EPhA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/eslint-scope/-/eslint-scope-3.7.4.tgz}
     name: '@types/eslint-scope'
@@ -1519,6 +1549,12 @@ packages:
     dependencies:
       '@types/node': registry.npmmirror.com/@types/node/18.11.18
     dev: false
+
+  registry.npmmirror.com/@types/luxon/3.2.0:
+    resolution: {integrity: sha512-lGmaGFoaXHuOLXFvuju2bfvZRqxAqkHPx9Y9IQdQABrinJJshJwfNCKV+u7rR3kJbiqfTF/NhOkcxxAFrObyaA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/luxon/-/luxon-3.2.0.tgz}
+    name: '@types/luxon'
+    version: 3.2.0
+    dev: true
 
   registry.npmmirror.com/@types/mime/3.0.1:
     resolution: {integrity: sha512-Y4XFY5VJAuw0FgAqPNd6NNoV44jbq9Bz2L7Rh/J6jLTiHBSBJa9fxqQIvkIld4GsoDOcCbvzOUAbLPsSKKg+uA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/mime/-/mime-3.0.1.tgz}
@@ -2681,6 +2717,14 @@ packages:
     resolution: {integrity: sha512-dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/create-require/-/create-require-1.1.1.tgz}
     name: create-require
     version: 1.1.1
+
+  registry.npmmirror.com/cron/2.0.0:
+    resolution: {integrity: sha512-RPeRunBCFr/WEo7WLp8Jnm45F/ziGJiHVvVQEBSDTSGu6uHW49b2FOP2O14DcXlGJRLhwE7TIoDzHHK4KmlL6g==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/cron/-/cron-2.0.0.tgz}
+    name: cron
+    version: 2.0.0
+    dependencies:
+      luxon: registry.npmmirror.com/luxon/1.28.1
+    dev: false
 
   registry.npmmirror.com/cross-env/7.0.3:
     resolution: {integrity: sha512-+/HKd6EgcQCJGh2PSjZuUitQBQynKor4wrFbRg4DtAgS1aWO+gU52xpH7M9ScGgXSYmAVS9bIJ8EzuaGw0oNAw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/cross-env/-/cross-env-7.0.3.tgz}
@@ -4706,6 +4750,12 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       yallist: registry.npmmirror.com/yallist/4.0.0
+
+  registry.npmmirror.com/luxon/1.28.1:
+    resolution: {integrity: sha512-gYHAa180mKrNIUJCbwpmD0aTu9kV0dREDrwNnuyFAsO1Wt0EVYSZelPnJlbj9HplzXX/YWXHFTL45kvZ53M0pw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/luxon/-/luxon-1.28.1.tgz}
+    name: luxon
+    version: 1.28.1
+    dev: false
 
   registry.npmmirror.com/macos-release/2.5.0:
     resolution: {integrity: sha512-EIgv+QZ9r+814gjJj0Bt5vSLJLzswGmSUbUpbi9AIr/fsN2IWFBl2NucV9PAiek+U1STK468tEkxmVYUtuAN3g==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/macos-release/-/macos-release-2.5.0.tgz}

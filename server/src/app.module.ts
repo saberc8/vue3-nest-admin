@@ -12,6 +12,8 @@ import { getConfig } from './utils'
 import { SharedModule } from './shared/shared.module'
 import { APP_FILTER, APP_INTERCEPTOR, APP_PIPE, APP_GUARD } from '@nestjs/core'
 
+import { ScheduleModule } from '@nestjs/schedule'
+import { TasksModule } from './schedule/tasks.module'
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -36,6 +38,8 @@ import { APP_FILTER, APP_INTERCEPTOR, APP_PIPE, APP_GUARD } from '@nestjs/core'
     }),
     ApiModule,
     SharedModule,
+    ScheduleModule.forRoot(),
+    TasksModule,
   ],
   controllers: [AppController],
   providers: [
