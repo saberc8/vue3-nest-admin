@@ -31,10 +31,16 @@
   }>()
   interface FormState {
     username: string
+    nickname: string
+    password: string
+    confirmPassword: string
     // ignoreKeepAlive: boolean
   }
   const formState = reactive<FormState>({
     username: '1',
+    nickname: '1',
+    password: '123456',
+    confirmPassword: '123456',
   })
 
   const formList = ref([
@@ -44,16 +50,33 @@
       placeholder: '请输入用户名',
       value: 'username',
     },
+    {
+      type: 'input',
+      label: '用户昵称',
+      placeholder: '请输入用户昵称',
+      value: 'nickname',
+    },
+    {
+      type: 'input',
+      label: '密码',
+      placeholder: '请输入密码',
+      value: 'password',
+    },
+    {
+      type: 'input',
+      label: '确认密码',
+      placeholder: '请再次输入密码',
+      value: 'confirmPassword',
+    },
   ])
   const handleOk = () => {
     console.log('ok')
     console.log(formState)
     addUser(formState).then((res) => {
       console.log(res, 'res')
-      if (res.id) {
-        message.success('添加成功')
-        emits('refresh', false)
-      }
+
+      message.success(res.message || res)
+      emits('refresh', false)
     })
   }
   const closeModal = () => {
