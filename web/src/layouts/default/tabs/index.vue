@@ -114,7 +114,7 @@
         .ant-tabs-tab {
           height: 26px;
           line-height: 26px;
-          color: rgb(0, 0, 0);
+          // color: rgb(0, 0, 0);
           background-color: #ffffff;
           transition: none;
           border: 1px solid #eee;
@@ -148,13 +148,6 @@
           }
         }
 
-        .ant-tabs-tab:not(.ant-tabs-tab-active) {
-          &:hover {
-            color: rgb(0, 0, 0);
-            font-size: 10px;
-          }
-        }
-
         .ant-tabs-tab-active {
           position: relative;
           background: #1677ff;
@@ -162,7 +155,6 @@
           transition: none;
           color: #fff;
           font-size: 10px;
-
           .ant-tabs-tab-btn {
             color: rgb(255, 255, 255);
           }
@@ -194,46 +186,10 @@
     .ant-tabs-tab:not(.ant-tabs-tab-active) {
       .anticon-close {
         font-size: 10px;
-
         svg {
           width: 0.6em;
         }
       }
-    }
-
-    .ant-dropdown-trigger {
-      display: inline-flex;
-    }
-
-    &--hide-close {
-      .ant-tabs-tab-remove {
-        opacity: 0 !important;
-      }
-    }
-  }
-
-  .ant-tabs-dropdown-menu {
-    &-title-content {
-      display: flex;
-      align-items: center;
-
-      .multiple-tabbar {
-        &-content__info {
-          width: auto;
-          margin-left: 0;
-          line-height: 28px;
-        }
-      }
-    }
-
-    &-item-remove {
-      margin-left: auto;
-    }
-  }
-
-  .multiple-tabs__dropdown {
-    .ant-dropdown-content {
-      width: 172px;
     }
   }
 </style>
