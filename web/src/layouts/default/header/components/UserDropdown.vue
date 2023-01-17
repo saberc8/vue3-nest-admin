@@ -5,7 +5,7 @@
       <div @click="handleMenuClick(2)" class="popover">文档</div>
       <div @click="handleMenuClick(3)" class="popover">github</div>
     </template>
-    <a-space>
+    <a-space style="cursor: pointer">
       <img class="avatar" :src="getUserInfo.avatar" />
       <a-space>
         <span>

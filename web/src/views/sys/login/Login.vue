@@ -12,7 +12,7 @@
     <div class="login-container-form">
       <a-tabs v-model:activeKey="activeKey" centered>
         <a-tab-pane key="1" tab="账号密码登录"><LoginForm /></a-tab-pane>
-        <a-tab-pane key="2" tab="手机号登录" force-render><div></div></a-tab-pane>
+        <a-tab-pane key="2" tab="注册" force-render><div></div></a-tab-pane>
       </a-tabs>
     </div>
   </div>
@@ -64,7 +64,6 @@
 
     &-form {
       width: 400px;
-      height: 300px;
       // background: rgb(255, 255, 255);
       display: flex;
       justify-content: center;
