@@ -7,7 +7,6 @@ enum Api {
   GetUserInfo = '/user/getUserInfo',
   GerUserList = '/user/list',
   AddUser = '/user/add',
-
   TestRetry = '/testRetry',
 }
 
@@ -24,8 +23,8 @@ export function loginApi(params: LoginParams) {
 /**
  * @description: getUserInfo
  */
-export function getUserInfo() {
-  return defHttp.get<GetUserInfoModel>({ url: Api.GetUserInfo })
+export function getUserInfo(id: number) {
+  return defHttp.get<GetUserInfoModel>({ url: Api.GetUserInfo, params: { id } })
 }
 
 /**

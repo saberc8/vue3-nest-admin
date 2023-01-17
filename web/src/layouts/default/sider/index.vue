@@ -15,6 +15,29 @@
     position: relative;
   }
 
+  body *::-webkit-scrollbar {
+    width: 4px;
+    height: 5px;
+  }
+
+  body *::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 2px;
+  }
+
+  body *::-webkit-scrollbar-thumb {
+    background: rgb(224, 224, 224);
+    border-radius: 2px;
+  }
+
+  body *::-webkit-scrollbar-thumb:hover {
+    background: rgb(175, 175, 175);
+  }
+
+  body *::-webkit-scrollbar-corner {
+    background: rgb(255, 255, 255);
+  }
+
   .slogan {
     position: fixed;
     display: flex;

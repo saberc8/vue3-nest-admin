@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 import { store } from '@/store'
 import { RoleEnum } from '@/enums/roleEnum'
 import { PageEnum } from '@/enums/pageEnum'
-import { ROLES_KEY, TOKEN_KEY, USER_INFO_KEY } from '@/enums/cacheEnum'
+import { ROLES_KEY, TOKEN_KEY, USER_INFO_KEY, USER_ID_KEY } from '@/enums/cacheEnum'
 import { getAuthCache, setAuthCache } from '@/utils/auth'
 import { GetUserInfoModel, LoginParams } from '@/api/sys/model/userModel'
 import { getUserInfo, loginApi } from '@/api/sys/user'
@@ -31,6 +31,7 @@ export const useUserStore = defineStore({
     userInfo: null,
     // token
     token: undefined,
+    userId: undefined,
     // roleList
     roleList: [],
     // Whether the login expired
@@ -44,6 +45,9 @@ export const useUserStore = defineStore({
     },
     getToken(): string {
       return this.token || getAuthCache<string>(TOKEN_KEY)
+    },
+    getUserId(): string {
+      return this.userId || getAuthCache<string>(USER_ID_KEY)
     },
     getRoleList(): RoleEnum[] {
       return this.roleList.length > 0 ? this.roleList : getAuthCache<RoleEnum[]>(ROLES_KEY)
@@ -59,6 +63,10 @@ export const useUserStore = defineStore({
     setToken(info: string | undefined) {
       this.token = info ? info : '' // for null or undefined value
       setAuthCache(TOKEN_KEY, info)
+    },
+    setUserId(info: string | undefined) {
+      this.userId = info ? info : '' // for null or undefined value
+      setAuthCache(USER_ID_KEY, info)
     },
     setRoleList(roleList: RoleEnum[]) {
       this.roleList = roleList
@@ -90,14 +98,16 @@ export const useUserStore = defineStore({
         const { goHome = true, ...loginParams } = params
         const data = await loginApi(loginParams)
         console.log(data, 'data111')
-        const { token } = data
+        const { token, id } = data
         this.setToken(token)
+        this.setUserId(id)
         return this.afterLoginAction(goHome)
       } catch (error) {
         return Promise.reject(error)
       }
     },
     async afterLoginAction(goHome?: boolean): Promise<GetUserInfoModel | null> {
+      console.log('afterLoginAction')
       if (!this.getToken) return null
       // get user info
       const userInfo = await this.getUserInfoAction()
@@ -120,7 +130,8 @@ export const useUserStore = defineStore({
     },
     async getUserInfoAction(): Promise<UserInfo | null> {
       if (!this.getToken) return null
-      const userInfo = await getUserInfo()
+      const userInfo = await getUserInfo(this.getUserId)
+      console.log(userInfo, 'userInfo')
       const { roles = [] } = userInfo
       if (isArray(roles)) {
         const roleList = roles.map((item) => item.value) as RoleEnum[]
@@ -137,6 +148,7 @@ export const useUserStore = defineStore({
      */
     async logout(goLogin = false) {
       this.setToken(undefined)
+      this.setUserId(undefined)
       this.setSessionTimeout(false)
       this.setUserInfo(null)
       goLogin && router.push(PageEnum.BASE_LOGIN)

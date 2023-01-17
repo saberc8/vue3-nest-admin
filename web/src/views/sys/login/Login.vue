@@ -32,10 +32,8 @@
     height: 100vh;
     overflow: auto;
     background: #dee2e7;
-    background-image: url(https://gw.alipayobjects.com/zos/rmsportal/TVYTbAXWheQpRcWDaDMu.svg);
+    background-image: url(https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/V-_oS6r-i7wAAAAAAAAAAAAAFl94AQBr);
     background-repeat: no-repeat;
-    background-position: center 110px;
-    background-size: 100%;
 
     &-slogan {
       display: flex;

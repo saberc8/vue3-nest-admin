@@ -16,7 +16,7 @@
 
 <style>
   /* 滚动条 */
-  body *::-webkit-scrollbar {
+  /* body *::-webkit-scrollbar {
     width: 4px;
     height: 5px;
   }
@@ -37,5 +37,5 @@
 
   body *::-webkit-scrollbar-corner {
     background: rgb(255, 255, 255);
-  }
+  } */
 </style>

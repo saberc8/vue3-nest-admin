@@ -5,14 +5,15 @@
       <div @click="handleMenuClick(2)" class="popover">文档</div>
       <div @click="handleMenuClick(3)" class="popover">github</div>
     </template>
-    <span>
+    <a-space>
       <img class="avatar" :src="getUserInfo.avatar" />
-      <span>
+      <a-space>
         <span>
-          {{ getUserInfo.realName }}
+          {{ getUserInfo.nickname }}
         </span>
-      </span>
-    </span>
+        <a-tag color="green">{{ getUserInfo.isSuperText }}</a-tag>
+      </a-space>
+    </a-space>
   </a-popover>
 </template>
 <script lang="ts" setup>
@@ -26,8 +27,8 @@
   const userStore = useUserStore()
 
   const getUserInfo = computed(() => {
-    const { realName = '', avatar, desc } = userStore.getUserInfo || {}
-    return { realName, avatar: avatar || headerImg, desc }
+    const { nickname = '', avatar, desc, isSuperText = '普通用户' } = userStore.getUserInfo || {}
+    return { nickname, avatar: avatar || headerImg, desc, isSuperText }
   })
 
   //  login out
@@ -72,8 +73,7 @@
   }
 
   .popover {
-    padding: 5px 10px;
+    padding: 5px;
     cursor: pointer;
-    border-bottom: 1px solid #e8e8e8;
   }
 </style>

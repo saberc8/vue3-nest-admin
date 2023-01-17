@@ -76,8 +76,19 @@ export class UserService {
     }
   }
 
-  async findUserInfo(): Promise<any> {
-    return await this.userEntity.find()
+  /**
+   * @description: 用户信息查询
+   * @param {FindUserDto} FindUserDto
+   * @return {*}
+   */
+
+  async findUserInfo(data: FindUserDto) {
+    const { id } = data
+    const user = await this.userEntity.findOne({ where: { id }, relations: ['roles'] })
+    if (!user) {
+      throw new HttpException('用户不存在', 201)
+    }
+    return user
   }
 
   async findUserList(findUserDto: FindUserDto) {

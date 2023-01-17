@@ -30,7 +30,6 @@ const transform: AxiosTransform = {
    * @description: 处理响应数据。如果数据不是预期格式，可直接抛出错误
    */
   transformResponseHook: (res: AxiosResponse<Result>, options: RequestOptions) => {
-    console.log(res, '00000res')
     const { isTransformResponse, isReturnNativeResponse } = options
     // 是否返回原生响应头 比如：需要获取响应头时使用该属性
     if (isReturnNativeResponse) {
@@ -44,7 +43,6 @@ const transform: AxiosTransform = {
     // 错误的时候返回
 
     const { data } = res
-    console.log(res, 'axios-res')
     if (!data) {
       // return '[HTTP] Request has no return value';
       throw new Error('请求异常，请重试')

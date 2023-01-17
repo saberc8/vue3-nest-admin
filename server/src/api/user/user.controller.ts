@@ -27,8 +27,8 @@ export class UserController {
   }
 
   @Get('getUserInfo')
-  async getUserInfo() {
-    return await this.userService.findUserInfo()
+  async getUserInfo(@Query() data: FindUserDto) {
+    return await this.userService.findUserInfo(data)
   }
 
   @Get('list')

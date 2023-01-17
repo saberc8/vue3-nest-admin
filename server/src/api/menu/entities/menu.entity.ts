@@ -1,7 +1,6 @@
 import { SharedEntity } from '@src/shared/entities/base.entity'
-import { RoleMenuEntity } from '@src/api/role/entities/role-menu.entity'
 
-import { Entity, Column, Index, OneToMany } from 'typeorm'
+import { Entity, Column, Index } from 'typeorm'
 
 @Entity('menu')
 export class MenuEntity extends SharedEntity {
