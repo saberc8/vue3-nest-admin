@@ -15,7 +15,6 @@ export class AuthGuard implements CanActivate {
     private readonly userService: UserService,
   ) {}
   async canActivate(context: ExecutionContext): Promise<boolean> {
-    return true
     const request = context.switchToHttp().getRequest()
     const url = request.url.split('?')[0]
     // 白名单判断
@@ -25,7 +24,6 @@ export class AuthGuard implements CanActivate {
     const token =
       context.switchToRpc().getData().headers.token ||
       context.switchToHttp().getRequest().body.token
-    console.log(token, '当前token----')
     if (token) {
       // 如果传递了token的话就要从redis中查询是否有该token
       // -----redis拿token

@@ -21,7 +21,6 @@ let AuthGuard = class AuthGuard {
         this.userService = userService;
     }
     async canActivate(context) {
-        return true;
         const request = context.switchToHttp().getRequest();
         const url = request.url.split('?')[0];
         if (apiWriteList_1.default.includes(url)) {
@@ -29,7 +28,6 @@ let AuthGuard = class AuthGuard {
         }
         const token = context.switchToRpc().getData().headers.token ||
             context.switchToHttp().getRequest().body.token;
-        console.log(token, '当前token----');
         if (token) {
             const atUserId = this.userService.verifyToken(token);
             console.log(atUserId, 'atUserId');
