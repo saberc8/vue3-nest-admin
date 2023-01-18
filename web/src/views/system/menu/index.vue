@@ -57,7 +57,7 @@
     { field: 'component', title: '组件', showOverflow: true, showHeaderOverflow: true, width: 150 },
     {
       field: 'redirect',
-      title: '父级定向',
+      title: '父级重定向',
       showOverflow: true,
       showHeaderOverflow: true,
       width: 150,

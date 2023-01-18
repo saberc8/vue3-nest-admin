@@ -47,7 +47,7 @@ export class UserController {
     return await this.userService.saveUserRole(data)
   }
 
-  @Post('init_database')
+  @Post('initDatabase')
   async initDatabase() {
     return await this.userService.initDatabase()
   }

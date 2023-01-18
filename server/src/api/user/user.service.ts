@@ -15,6 +15,7 @@ import { UserEntity } from './entities/user.entity'
 import { RoleEntity } from '@src/api/role/entities/role.entity'
 import { MenuEntity } from '@src/api/menu/entities/menu.entity'
 import { menuDatabase } from '@src/database/menu'
+import { userDatabase } from '@src/database/user'
 // import { UserRoleEntity } from './entities/user_role.entity'
 @Injectable()
 export class UserService {
@@ -184,21 +185,19 @@ export class UserService {
     console.log('init database')
     // 删除user表所有数据
     await this.dataSource.createQueryBuilder().delete().from(UserEntity).execute()
+    // 重置user主键
+    await this.dataSource.query('ALTER TABLE user AUTO_INCREMENT = 1')
     // 初始化表user所有数据
     await this.dataSource
       .createQueryBuilder()
       .insert()
       .into(UserEntity)
-      .values([
-        {
-          username: 'admin',
-          nickname: '系统管理员',
-          isSuper: 1,
-        },
-      ])
+      .values(userDatabase)
       .execute()
     // 删除menu表所有数据
     await this.dataSource.createQueryBuilder().delete().from(MenuEntity).execute()
+    // 重置menu主键
+    await this.dataSource.query('ALTER TABLE menu AUTO_INCREMENT = 1')
     // 初始化表menu所有数据
     await this.dataSource
       .createQueryBuilder()

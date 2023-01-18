@@ -25,7 +25,7 @@
   import { getUserList } from '@/api/sys/user'
   import { VxeGridPropTypes } from 'vxe-table'
   import { PlusOutlined } from '@ant-design/icons-vue'
-  import addUser from './components/addUser.vue'
+  import addUser from './components/userModal.vue'
   import dayjs from 'dayjs'
   const proTable = ref()
   console.log(proTable.value, 'proTable')

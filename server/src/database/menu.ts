@@ -1,9 +1,6 @@
 export const menuDatabase = [
   {
     id: 1,
-    created_at: '17/1/2023 14:31:30.489718',
-    updated_at: '17/1/2023 15:02:59.845295',
-    deleted_at: null,
     name: 'Workbench',
     title: '项目介绍',
     path: 'workbench',

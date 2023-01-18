@@ -37,7 +37,13 @@
       <a-button type="primary" size="large" block @click="handleLogin" :loading="loading">
         登录
       </a-button>
-      <a-button type="danger" size="large" block @click="initDatabase" style="margin-top: 20px">
+      <a-button
+        type="danger"
+        size="large"
+        block
+        @click="handleInitDatabase"
+        style="margin-top: 20px"
+      >
         数据库初始化
       </a-button>
     </a-form-item>
@@ -47,7 +53,9 @@
   import { useMessage } from '@/hooks/web/useMessage'
   import { useUserStore } from '@/store/modules/user'
   import { LoginStateEnum, useLoginState, useFormRules, useFormValid } from './useLogin'
-  const { notification } = useMessage()
+  import { initDatabase } from '@/api/sys/user'
+
+  const { notification, createMessage } = useMessage()
   const userStore = useUserStore()
 
   const { getLoginState } = useLoginState()
@@ -92,7 +100,7 @@
     }
   }
 
-  async function initDatabase() {
+  async function handleInitDatabase() {
     const { createConfirm } = useMessage()
 
     createConfirm({
@@ -101,6 +109,9 @@
       content: () => h('span', '确定要初始化数据库吗？'),
       onOk: async () => {
         console.log('初始化数据库')
+        const res = await initDatabase()
+        console.log(res)
+        createMessage.success('初始化成功')
       },
     })
   }

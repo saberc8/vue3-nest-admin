@@ -7,7 +7,7 @@ enum Api {
   GetUserInfo = '/user/getUserInfo',
   GerUserList = '/user/list',
   AddUser = '/user/add',
-  TestRetry = '/testRetry',
+  InitDatabase = '/user/initDatabase',
 }
 
 /**
@@ -48,15 +48,8 @@ export function addUser(params) {
   })
 }
 
-export function testRetry() {
-  return defHttp.get(
-    { url: Api.TestRetry },
-    {
-      retryRequest: {
-        isOpenRetry: true,
-        count: 5,
-        waitTime: 1000,
-      },
-    },
-  )
+export function initDatabase() {
+  return defHttp.post({
+    url: Api.InitDatabase,
+  })
 }

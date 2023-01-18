@@ -29,7 +29,7 @@ import {
   Column,
   // Colgroup,
   Grid,
-  // Tooltip,
+  Tooltip,
   Toolbar,
   Pager,
   // Form,
@@ -71,7 +71,7 @@ async function bootstrap() {
     .use(Column)
     // .use(Colgroup)
     .use(Grid)
-    // .use(Tooltip)
+    .use(Tooltip)
     .use(Toolbar)
     .use(Pager)
     // .use(Form)
