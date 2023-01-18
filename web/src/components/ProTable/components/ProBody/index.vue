@@ -52,7 +52,7 @@
   defineExpose({
     xGrid,
   })
-  const tablePage = reactive({
+  let tablePage = reactive({
     page: 1,
     size: 10,
   })
@@ -99,6 +99,10 @@
 
   const reloadData = () => {
     console.log('redo')
+    tablePage = {
+      page: 1,
+      size: 10,
+    }
     emit('reloadData')
     // data.map((item) => {
     //   item.children = []

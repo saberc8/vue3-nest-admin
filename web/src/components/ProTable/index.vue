@@ -65,6 +65,7 @@
     //   ...searchParams,
     // }
     // renderTable(props.getListFunc, params)
+    searchData(e)
   }
 
   const searchData = (e) => {
