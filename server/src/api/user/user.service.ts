@@ -13,8 +13,9 @@ import { ConfigService } from '@nestjs/config'
 
 import { UserEntity } from './entities/user.entity'
 import { RoleEntity } from '@src/api/role/entities/role.entity'
+import { MenuEntity } from '@src/api/menu/entities/menu.entity'
+import { menuDatabase } from '@src/database/menu'
 // import { UserRoleEntity } from './entities/user_role.entity'
-
 @Injectable()
 export class UserService {
   constructor(
@@ -177,5 +178,34 @@ export class UserService {
     } catch (error) {
       return null
     }
+  }
+
+  async initDatabase() {
+    console.log('init database')
+    // 删除user表所有数据
+    await this.dataSource.createQueryBuilder().delete().from(UserEntity).execute()
+    // 初始化表user所有数据
+    await this.dataSource
+      .createQueryBuilder()
+      .insert()
+      .into(UserEntity)
+      .values([
+        {
+          username: 'admin',
+          nickname: '系统管理员',
+          isSuper: 1,
+        },
+      ])
+      .execute()
+    // 删除menu表所有数据
+    await this.dataSource.createQueryBuilder().delete().from(MenuEntity).execute()
+    // 初始化表menu所有数据
+    await this.dataSource
+      .createQueryBuilder()
+      .insert()
+      .into(MenuEntity)
+      .values(menuDatabase)
+      .execute()
+    return '初始化成功'
   }
 }

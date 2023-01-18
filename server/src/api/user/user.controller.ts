@@ -46,4 +46,9 @@ export class UserController {
     console.log(data)
     return await this.userService.saveUserRole(data)
   }
+
+  @Post('init_database')
+  async initDatabase() {
+    return await this.userService.initDatabase()
+  }
 }
