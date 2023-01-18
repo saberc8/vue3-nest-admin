@@ -1,6 +1,5 @@
 export const menuDatabase = [
   {
-    id: 1,
     name: 'Workbench',
     title: '项目介绍',
     path: 'workbench',
@@ -15,10 +14,6 @@ export const menuDatabase = [
     component: 'LAYOUT',
   },
   {
-    id: 2,
-    created_at: '17/1/2023 15:02:40.065911',
-    updated_at: '17/1/2023 15:02:57.271092',
-    deleted_at: null,
     name: 'Level',
     title: 'level',
     path: '/level',
@@ -33,10 +28,6 @@ export const menuDatabase = [
     component: 'LAYOUT',
   },
   {
-    id: 3,
-    created_at: '17/1/2023 15:05:44.529242',
-    updated_at: '17/1/2023 15:06:43.340995',
-    deleted_at: null,
     name: 'Menu1Demo',
     title: 'Menu1',
     path: 'menu1',
@@ -51,10 +42,6 @@ export const menuDatabase = [
     component: '',
   },
   {
-    id: 4,
-    created_at: '17/1/2023 15:11:24.575526',
-    updated_at: '17/1/2023 15:36:11.42183',
-    deleted_at: null,
     name: 'Menu11Demo',
     title: 'Menu1-1',
     path: 'menu1-1',
@@ -69,10 +56,6 @@ export const menuDatabase = [
     component: '',
   },
   {
-    id: 5,
-    created_at: '17/1/2023 15:13:15.342956',
-    updated_at: '17/1/2023 15:42:45.971022',
-    deleted_at: null,
     name: 'Menu111Demo',
     title: 'Menu111',
     path: 'menu1-1-1',
