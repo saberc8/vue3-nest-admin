@@ -18,20 +18,29 @@
       </a-button>
     </template>
   </ProTable>
-  <add-user :visible="visible" :title="title" @close-modal="closeModal" @refresh="refreshTable" />
+  <add-user
+    :visible="visible"
+    :title="title"
+    :formData="formData"
+    @close-modal="closeModal"
+    @refresh="refreshTable"
+  />
 </template>
 <script lang="ts" setup>
+  import { createVNode, VNode } from 'vue'
   import ProTable from '@/components/ProTable/index.vue'
   import { getUserList } from '@/api/sys/user'
   import { VxeGridPropTypes } from 'vxe-table'
   import { PlusOutlined } from '@ant-design/icons-vue'
   import addUser from './components/userModal.vue'
+  import { message, Modal } from 'ant-design-vue'
   import dayjs from 'dayjs'
+  import { FormState } from './type'
   const proTable = ref()
   console.log(proTable.value, 'proTable')
-
+  const formData = ref<FormState>()
   const visible = ref<Boolean>(false)
-  const title = '新增菜单'
+  const title = ref('新增用户')
   const getListFunc = getUserList
 
   const columns: VxeGridPropTypes.Columns = [
@@ -52,6 +61,54 @@
       field: 'updatedAt',
       title: '更新时间',
       formatter: (row: any) => dayjs(row.updatedAt).format('YYYY-MM-DD HH:mm:ss'),
+    },
+    {
+      title: '操作',
+      width: 200,
+      align: 'center',
+      slots: {
+        default: ({ row }): VNode => {
+          return createVNode(
+            resolveComponent('a-space'),
+            {
+              size: 'middle',
+            },
+            {
+              default: (): VNode[] => [
+                createVNode(
+                  resolveComponent('a-button'),
+                  {
+                    type: 'primary',
+                    size: 'small',
+                    onClick: () => {
+                      editUserData(row)
+                    },
+                  },
+                  () => '编辑',
+                ),
+                createVNode(
+                  resolveComponent('a-button'),
+                  {
+                    type: 'danger',
+                    size: 'small',
+                    onClick: () => {
+                      Modal.confirm({
+                        title: '提示',
+                        content: '确定删除该菜单吗？',
+                        onOk: () => {
+                          deleteUserFunc(row.id)
+                        },
+                      })
+                    },
+                  },
+                  () => '删除',
+                ),
+              ],
+            },
+          )
+        },
+      },
+      fixed: 'right',
     },
   ]
 
@@ -93,5 +150,16 @@
   const refreshTable = () => {
     closeModal()
     proTable.value.reloadData()
+  }
+
+  const editUserData = (row: any) => {
+    title.value = '编辑用户'
+    formData.value = row
+    visible.value = true
+  }
+
+  const deleteUserFunc = async (id: number) => {
+    console.log(id)
+    message.success('删除成功')
   }
 </script>
