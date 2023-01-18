@@ -1,7 +1,7 @@
 export interface FormState {
-  username: string
-  nickname: string
-  password: string
-  confirmPassword: string
+  username?: string
+  nickname?: string
+  password?: string
+  confirmPassword?: string
   // ignoreKeepAlive: boolean
 }

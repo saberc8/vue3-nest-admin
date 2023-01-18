@@ -30,8 +30,8 @@ export function getUserInfo(id: number) {
 /**
  * @description: getUserList
  */
-export function getUserList() {
-  return defHttp.get({ url: Api.GerUserList })
+export function getUserList(params) {
+  return defHttp.get({ url: Api.GerUserList, params })
 }
 
 export function doLogout() {

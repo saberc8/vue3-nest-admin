@@ -5,7 +5,7 @@ import { FindUserDto } from './dto/find-user.dto'
 import { FindUserRoleDto } from './dto/find-user-role.dto'
 
 import { InjectRepository } from '@nestjs/typeorm'
-import { Repository, DataSource } from 'typeorm'
+import { Repository, DataSource, Like } from 'typeorm'
 
 import { genSalt, hash, compare } from 'bcryptjs'
 import { JwtService } from '@nestjs/jwt'
@@ -94,11 +94,13 @@ export class UserService {
   }
 
   async findUserList(findUserDto: FindUserDto) {
-    const { page = 1, size = 10, username, id } = findUserDto
+    console.log('findUserDto', findUserDto)
+    const { page = 1, size = 10, username, nickname, id } = findUserDto
     // where 模糊搜索
     const where = {
       ...(!!id ? { id } : null),
-      ...(!!username ? { username } : null),
+      ...(!!username ? { username: Like(`%${username}%`) } : null),
+      ...(!!nickname ? { nickname: Like(`%${nickname}%`) } : null),
     }
     const result = await this.userEntity.findAndCount({
       where,

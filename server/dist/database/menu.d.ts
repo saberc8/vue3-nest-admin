@@ -1,0 +1,35 @@
+export declare const menuDatabase: ({
+    id: number;
+    name: string;
+    title: string;
+    path: string;
+    icon: string;
+    redirect: string;
+    pid: number;
+    order_no: number;
+    frame_src: string;
+    keep_alive: number;
+    hide_menu: number;
+    hide_breadcrumb: number;
+    component: string;
+    created_at?: undefined;
+    updated_at?: undefined;
+    deleted_at?: undefined;
+} | {
+    id: number;
+    created_at: string;
+    updated_at: string;
+    deleted_at: any;
+    name: string;
+    title: string;
+    path: string;
+    icon: string;
+    redirect: string;
+    pid: number;
+    order_no: number;
+    frame_src: string;
+    keep_alive: number;
+    hide_menu: number;
+    hide_breadcrumb: number;
+    component: string;
+})[];

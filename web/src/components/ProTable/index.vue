@@ -49,7 +49,9 @@
     size: 10,
   })
   const renderTable = (func: Function, params: Object) => {
+    console.log(params, 'params2')
     func(params).then((res) => {
+      console.log(res, '---')
       data.value = res.list
       tablePage.total = res.total
     })
@@ -75,11 +77,14 @@
   }
 
   const searchData = (e) => {
+    console.log('e', e, 'searchData')
+
     searchParams = e
     const params = {
       ...props.params,
       ...searchParams,
     }
+    console.log(params, 'params')
     renderTable(props.getListFunc, params)
   }
   defineExpose({

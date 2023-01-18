@@ -24,24 +24,32 @@
 <script lang="ts" setup>
   import { addUser } from '@/api/sys/user'
   import { message } from 'ant-design-vue'
+  import { FormState } from '../type'
   const emits = defineEmits(['closeModal', 'refresh'])
-  defineProps<{
+  const props = defineProps<{
     visible: Boolean
     title: String
+    formData: FormState | undefined | null
   }>()
-  interface FormState {
-    username: string
-    nickname: string
-    password: string
-    confirmPassword: string
-    // ignoreKeepAlive: boolean
-  }
+  // 检查props.formData类型
+  console.log(typeof props.formData, 'props.formData')
   const formState = reactive<FormState>({
-    username: '1',
-    nickname: '1',
+    username: '',
+    nickname: '',
     password: '123456',
     confirmPassword: '123456',
   })
+
+  watch(
+    () => props.formData,
+    (val) => {
+      if (val) {
+        const t = JSON.parse(JSON.stringify(val))
+        formState.username = t.username
+        formState.nickname = t.nickname
+      }
+    },
+  )
 
   const formList = ref([
     {
@@ -74,13 +82,14 @@
     console.log(formState)
     addUser(formState).then((res) => {
       console.log(res, 'res')
-
       message.success(res.message || res)
+      closeModal()
       emits('refresh', false)
     })
   }
   const closeModal = () => {
-    formatFormState(formState)
+    formState.username = ''
+    formState.nickname = ''
     emits('closeModal', false)
   }
 
@@ -90,11 +99,5 @@
 
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo)
-  }
-
-  const formatFormState = (data: any) => {
-    Object.keys(data).forEach((key) => {
-      data[key] = null
-    })
   }
 </script>

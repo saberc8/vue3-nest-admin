@@ -18,7 +18,7 @@
       </a-button>
     </template>
   </ProTable>
-  <add-user
+  <user-modal
     :visible="visible"
     :title="title"
     :formData="formData"
@@ -32,13 +32,13 @@
   import { getUserList } from '@/api/sys/user'
   import { VxeGridPropTypes } from 'vxe-table'
   import { PlusOutlined } from '@ant-design/icons-vue'
-  import addUser from './components/userModal.vue'
+  import userModal from './components/userModal.vue'
   import { message, Modal } from 'ant-design-vue'
   import dayjs from 'dayjs'
   import { FormState } from './type'
   const proTable = ref()
   console.log(proTable.value, 'proTable')
-  const formData = ref<FormState>()
+  const formData = ref<FormState>({})
   const visible = ref<Boolean>(false)
   const title = ref('新增用户')
   const getListFunc = getUserList
@@ -50,21 +50,44 @@
       treeNode: true, // 开启树图表
     },
     { field: 'id', title: 'ID', width: 80 },
-    { field: 'username', title: '用户名' },
-    { field: 'nickname', title: '用户昵称' },
+    { field: 'username', title: '用户名', width: 180 },
+    { field: 'nickname', title: '用户昵称', width: 180 },
+    {
+      field: 'isSuper',
+      title: '是否超级管理员',
+      width: 120,
+      align: 'center',
+      slots: {
+        default: ({ row }): VNode => {
+          return createVNode(
+            resolveComponent('a-tag'),
+            {
+              color: row.isSuper ? 'green' : 'red',
+            },
+            {
+              default: (): string => (row.isSuper ? '是' : '否'),
+            },
+          )
+        },
+      },
+    },
     {
       field: 'createdAt',
       title: '创建时间',
-      formatter: (row: any) => dayjs(row.createdAt).format('YYYY-MM-DD HH:mm:ss'),
+      formatter: (row: any) => {
+        return dayjs(row.row.createdAt).format('YYYY-MM-DD HH:mm:ss')
+      },
     },
     {
       field: 'updatedAt',
       title: '更新时间',
-      formatter: (row: any) => dayjs(row.updatedAt).format('YYYY-MM-DD HH:mm:ss'),
+      formatter: (row: any) => {
+        return dayjs(row.row.updatedAt).format('YYYY-MM-DD HH:mm:ss')
+      },
     },
     {
       title: '操作',
-      width: 200,
+      width: 220,
       align: 'center',
       slots: {
         default: ({ row }): VNode => {
@@ -85,6 +108,17 @@
                     },
                   },
                   () => '编辑',
+                ),
+                createVNode(
+                  resolveComponent('a-button'),
+                  {
+                    type: 'primary',
+                    size: 'small',
+                    onClick: () => {
+                      editUserData(row)
+                    },
+                  },
+                  () => '绑定角色',
                 ),
                 createVNode(
                   resolveComponent('a-button'),
@@ -140,6 +174,7 @@
 
   let dataSource = ref<any>([])
   const addUserData = () => {
+    title.value = '新增用户'
     visible.value = true
   }
 

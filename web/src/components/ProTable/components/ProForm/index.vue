@@ -47,6 +47,7 @@
   const proFromRef = ref()
   const formState = reactive({})
   const onFinish = (values: any) => {
+    console.log(values, 'values')
     emit('searchData', values)
   }
 
