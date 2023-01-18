@@ -61,6 +61,11 @@ export class MenuService {
     return Object.assign({ total: result[1] }, { list: result[0] })
   }
 
+  async getAllMenuList() {
+    const result = await this.menuEntity.find()
+    return result
+  }
+
   async deleteMenu(findMenuDto: FindMenuDto) {
     const { id } = findMenuDto
     console.log(id)

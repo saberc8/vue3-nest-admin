@@ -3,7 +3,7 @@ import { getMenuListResultModel, GetMenuListModel, AddMenuModel } from './model/
 
 enum Api {
   GetMenuList = '/menu/list',
-  GetRoleMenuList = '/role/menu_list',
+  GetRoleMenuList = '/role/menuList',
   AddMenu = '/menu/add',
   DeleteMenu = '/menu/delete',
   UpdateMenu = '/menu/update',

@@ -5,7 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { RoleService } from './role.service'
 import { RoleController } from './role.controller'
 import { RoleEntity } from './entities/role.entity'
-
+import { MenuEntity } from '@src/api/menu/entities/menu.entity'
 @Module({
   imports: [
     RouterModule.register([
@@ -14,7 +14,7 @@ import { RoleEntity } from './entities/role.entity'
         module: RoleModule,
       },
     ]),
-    TypeOrmModule.forFeature([RoleEntity]),
+    TypeOrmModule.forFeature([RoleEntity, MenuEntity]),
   ],
   controllers: [RoleController],
   providers: [RoleService],
