@@ -1,0 +1,1 @@
+import{_ as e,o as c,c as s,l as t,b as o}from"./index-7b1c4b91.js";const n={},a={class:"p-5"},r=o("br",null,null,-1);function _(l,d){return c(),s("div",a,[t(" 多层级缓存-页面1-1-1 "),r])}const i=e(n,[["render",_]]);export{i as default};

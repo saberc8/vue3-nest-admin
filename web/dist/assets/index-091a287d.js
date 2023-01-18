@@ -1,4 +1,4 @@
-import{d as g,a as p,o as i,k,w as e,e as t,l as n,b as l,t as a,c as b,H as x,G as j}from"./index-c1672c39.js";const w=l("blockquote",null,"后端部署",-1),q=l("blockquote",null,"前端部署",-1),V=g({__name:"index",setup(C){const r={title:"运行环境",frontend:{title:"前端环境",content:`nodejs 16.17.0
+import{d as g,a as p,o as i,k,w as e,e as t,l as n,b as l,t as a,c as b,H as x,G as j}from"./index-7b1c4b91.js";const w=l("blockquote",null,"后端部署",-1),q=l("blockquote",null,"前端部署",-1),V=g({__name:"index",setup(C){const r={title:"运行环境",frontend:{title:"前端环境",content:`nodejs 16.17.0
 pnpm 7.11`},backend:{title:"后端环境",content:`nestjs 9.1.3
 nodejs 16.17.0
 pnpm 7.11
